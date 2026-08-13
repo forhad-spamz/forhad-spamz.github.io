@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Spider-Man Gallery</title>
+    <title>Memories</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -16,52 +16,70 @@
         h1 {
             margin-top: 10px;
             margin-bottom: 25px;
-            font-size: 24px;
+            font-size: 26px;
             color: #38bdf8;
         }
         .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            max-width: 1000px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         .card {
             background-color: #1e293b;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-            max-width: 320px;
-            width: 100%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
         }
         .card img {
             width: 100%;
-            height: auto;
+            height: 320px;
+            object-fit: cover;
             display: block;
         }
     </style>
 </head>
 <body>
 
-    <h1>আমার স্পাইডারম্যান গ্যালারি</h1>
+    <h1>স্মৃতি </h1>
 
     <div class="gallery">
-        <!-- ছবি ১ -->
         <div class="card">
-            <img src="Aesthetic-Spider-Man-Pfp-for-YouTube-1.jpg" alt="Photo 1">
+            <img src="1000117033.jpg" alt="Photo 1">
         </div>
-
-        <!-- ছবি ২ -->
         <div class="card">
-            <img src="images (8).jpeg" alt="Photo 2">
+            <img src="1000117104.png" alt="Photo 2">
         </div>
-
-        <!-- ছবি ৩ -->
         <div class="card">
-            <img src="miles-morales-spider-man-across-the-spiderverse.jpg" alt="Photo 3">
+            <img src="1000116791.jpg" alt="Photo 3">
+        </div>
+        <div class="card">
+            <img src="1000116786.jpg" alt="Photo 4">
+        </div>
+        <div class="card">
+            <img src="1000115081.jpg" alt="Photo 5">
+        </div>
+        <div class="card">
+            <img src="1000114273.jpg" alt="Photo 6">
+        </div>
+        <div class="card">
+            <img src="1000114394.png" alt="Photo 7">
+        </div>
+        <div class="card">
+            <img src="1000114115.jpg" alt="Photo 8">
+        </div>
+        <div class="card">
+            <img src="1000113295.webp" alt="Photo 9">
+        </div>
+        <div class="card">
+            <img src="1000113149.jpg" alt="Photo 10">
         </div>
     </div>
 
 </body>
-        </html>
+                </html>
