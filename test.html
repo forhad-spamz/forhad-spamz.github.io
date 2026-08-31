@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Smart Study Assistant - HSC ICT</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f0f4f8; margin: 0; padding: 20px; }
+        .box { background: white; max-width: 550px; margin: auto; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h2 { color: #006a4e; text-align: center; }
+        .quiz-option { display: block; margin: 8px 0; padding: 10px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; }
+        .quiz-option:hover { background: #e2e8f0; }
+        #quiz-result { font-weight: bold; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h2>🤖 Smart Exam Evaluator</h2>
+        <p><strong>প্রশ্ন:</strong> HTML-এ ছবি যুক্ত করার সঠিক ট্যাগ কোনটি?</p>
+
+        <div class="quiz-option" onclick="checkAnswer(false)">A) &lt;image src="..."&gt;</div>
+        <div class="quiz-option" onclick="checkAnswer(true)">B) &lt;img src="..."&gt;</div>
+        <div class="quiz-option" onclick="checkAnswer(false)">C) &lt;picture&gt;...&lt;/picture&gt;</div>
+
+        <p id="quiz-result"></p>
+    </div>
+
+    <script>
+        function checkAnswer(isCorrect) {
+            let res = document.getElementById('quiz-result');
+            if(isCorrect) {
+                res.innerText = "✅ একদম সঠিক উত্তর! (অধ্যায় ৪: HTML Tag)";
+                res.style.color = "green";
+            } else {
+                res.innerText = "❌ ভুল উত্তর! সঠিক উত্তর হলো: <img>";
+                res.style.color = "red";
+            }
+        }
+    </script>
+
+</body>
+</html>
