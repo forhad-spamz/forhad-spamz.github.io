@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cipher Encryption Portal - HSC ICT</title>
+    <title>Smart Student ID & QR Generator</title>
+    <!-- QR Code Generator Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,118 +13,162 @@
             margin: 0;
             padding: 20px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
         }
-        .card {
-            background: white;
+        .main-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            max-width: 900px;
             width: 100%;
-            max-width: 550px;
-            padding: 25px;
+        }
+        .form-box, .card-box {
+            background: white;
+            padding: 20px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            border-top: 6px solid #006a4e;
+            flex: 1;
+            min-width: 300px;
         }
-        h2 { text-align: center; color: #006a4e; margin-bottom: 2px; }
-        .sub { text-align: center; color: #666; font-size: 13px; margin-bottom: 20px; }
+        h2 { text-align: center; color: #006a4e; margin-bottom: 15px; }
         
         label { font-weight: bold; color: #333; display: block; margin-top: 10px; }
-        textarea, input, select {
+        input, select {
             width: 100%;
-            padding: 10px;
+            padding: 8px;
             margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 6px;
-            box-sizing: border-radius;
             box-sizing: border-box;
-            font-size: 15px;
         }
-        
-        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
+
         .btn {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
+            width: 100%;
+            background-color: #006a4e;
             color: white;
-        }
-        .encrypt-btn { background-color: #006a4e; }
-        .decrypt-btn { background-color: #0056b3; }
-        
-        .result-box {
-            margin-top: 20px;
-            padding: 15px;
-            background: #eef2f5;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
             border-radius: 6px;
-            border-left: 4px solid #006a4e;
-            word-break: break-all;
+            cursor: pointer;
+            margin-top: 15px;
         }
-        .result-title { font-weight: bold; color: #333; margin-bottom: 5px; }
-        #output-text { font-size: 16px; color: #d63031; font-family: monospace; }
+        .btn:hover { background-color: #004d39; }
+
+        /* Student ID Card Layout */
+        .id-card {
+            width: 280px;
+            height: 420px;
+            border: 2px solid #006a4e;
+            border-radius: 12px;
+            margin: auto;
+            background: #fff;
+            text-align: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            background: linear-gradient(to bottom, #006a4e 25%, #ffffff 25%);
+        }
+        .id-card h3 { color: white; margin: 5px 0 0 0; font-size: 18px; }
+        .id-card p.sub { color: #e0e0e0; margin: 0 0 20px 0; font-size: 11px; }
+        .avatar {
+            width: 80px;
+            height: 80px;
+            background: #e0e0e0;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            border: 3px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+        }
+        .info { font-size: 14px; color: #333; text-align: left; margin-top: 10px; line-height: 1.6; }
+        .info strong { color: #006a4e; }
+        
+        /* QR Code Styling */
+        #qrcode {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h2>🔐 Secret Message Encryptor</h2>
-    <div class="sub">HSC ICT অধ্যায় ১ (সাইবার সিকিউরিটি) & অধ্যায় ৫ (C ASCII Loop Logic)</div>
+    <h2>🎓 Smart Student ID & QR Generator</h2>
+    <p style="color: #666; margin-bottom: 20px;">HSC ICT অধ্যায় ১ (ডিজিটাল আইডি) ও অধ্যায় ৪ (HTML Form)</p>
 
-    <label>আপনার মেসেজ/লেখা দিন:</label>
-    <textarea id="inputText" rows="3" placeholder="এখানে ইংরেজি টেক্সট লিখুন (যেমন: Hello ICT)..."></textarea>
+    <div class="main-container">
+        <!-- Input Form -->
+        <div class="form-box">
+            <h3>শিক্ষার্থীর তথ্য দিন</h3>
+            <label>শিক্ষার্থীর নাম:</label>
+            <input type="text" id="name" placeholder="যেমন: মোঃ ফরহাদ">
 
-    <label>সিক্রেট কি (Shift Key/নম্বর):</label>
-    <input type="number" id="shiftKey" value="3" min="1" max="25">
+            <label>রোল নম্বর:</label>
+            <input type="number" id="roll" placeholder="যেমন: ১০১">
 
-    <div class="btn-group">
-        <button class="btn encrypt-btn" onclick="processText('encrypt')">🔒 Encrypt (গোপন করুন)</button>
-        <button class="btn decrypt-btn" onclick="processText('decrypt')">🔓 Decrypt (উদ্ধার করুন)</button>
+            <label>বিভাগ:</label>
+            <select id="group">
+                <option value="বিজ্ঞান (Science)">বিজ্ঞান (Science)</option>
+                <option value="মানবিক (Arts)">মানবিক (Arts)</option>
+                <option value="ব্যবসায় শিক্ষা (Commerce)">ব্যবসায় শিক্ষা (Commerce)</option>
+            </select>
+
+            <label>সেশন/বছর:</label>
+            <input type="text" id="session" value="2025-2026">
+
+            <button class="btn" onclick="generateID()">ডিজিটাল আইডি ও QR কোড তৈরি করুন</button>
+        </div>
+
+        <!-- Generated ID Card Preview -->
+        <div class="card-box">
+            <h3>লাইভ আইডি কার্ড প্রিভিউ</h3>
+            <div class="id-card">
+                <h3>গভঃ কলেজ, চট্টগ্রাম</h3>
+                <p class="sub">STUDENT IDENTITY CARD</p>
+                <div class="avatar">👤</div>
+                <div class="info">
+                    <strong>নাম:</strong> <span id="card-name">মোঃ ফরহাদ</span><br>
+                    <strong>রোল:</strong> <span id="card-roll">১০১</span><br>
+                    <strong>গ্রুপ:</strong> <span id="card-group">বিজ্ঞান</span><br>
+                    <strong>সেশন:</strong> <span id="card-session">2025-2026</span>
+                </div>
+                <div id="qrcode"></div>
+            </div>
+        </div>
     </div>
 
-    <div class="result-box">
-        <div class="result-title">ফলাফল (Output):</div>
-        <div id="output-text">ফলাফল এখানে দেখাবে...</div>
-    </div>
-</div>
+    <script>
+        let qrcode = new QRCode(document.getElementById("qrcode"), {
+            width: 70,
+            height: 70
+        });
 
-<script>
-    // C Programming Logic for Caesar Cipher
-    function processText(action) {
-        let text = document.getElementById("inputText").value;
-        let key = parseInt(document.getElementById("shiftKey").value);
-        let output = "";
+        function generateID() {
+            let name = document.getElementById("name").value || "মোঃ ফরহাদ";
+            let roll = document.getElementById("roll").value || "১০১";
+            let group = document.getElementById("group").value;
+            let session = document.getElementById("session").value;
 
-        if (!text) {
-            document.getElementById("output-text").innerText = "দয়া করে কোনো টেক্সট টাইপ করুন!";
-            return;
+            // Card Text Update
+            document.getElementById("card-name").innerText = name;
+            document.getElementById("card-roll").innerText = roll;
+            document.getElementById("card-group").innerText = group;
+            document.getElementById("card-session").innerText = session;
+
+            // QR Code Content Update
+            let qrData = `Student ID Card\nName: ${name}\nRoll: ${roll}\nGroup: ${group}\nSession: ${session}`;
+            qrcode.makeCode(qrData);
         }
 
-        if (action === 'decrypt') {
-            key = (26 - key) % 26; // C Reverse Shift Logic
-        }
-
-        // C Programming Loop and ASCII Value Logic
-        for (let i = 0; i < text.length; i++) {
-            let ch = text.charCodeAt(i); // Equivalent to C (int)char ASCII value
-
-            // Uppercase Characters (A-Z: 65-90)
-            if (ch >= 65 && ch <= 90) {
-                output += String.fromCharCode((ch - 65 + key) % 26 + 65);
-            }
-            // Lowercase Characters (a-z: 97-122)
-            else if (ch >= 97 && ch <= 122) {
-                output += String.fromCharCode((ch - 97 + key) % 26 + 97);
-            }
-            // Other symbols/numbers stay same
-            else {
-                output += text.charAt(i);
-            }
-        }
-
-        document.getElementById("output-text").innerText = output;
-    }
-</script>
+        // Initial Load
+        generateID();
+    </script>
 
 </body>
     </html>
