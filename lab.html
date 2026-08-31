@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <title>Virtual Science Lab - HSC ICT Project</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background: #eef2f3; margin: 0; padding: 20px; }
+        .lab-card { background: white; max-width: 500px; margin: auto; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .beaker { width: 120px; height: 160px; border: 4px solid #333; border-top: none; border-radius: 0 0 15px 15px; margin: 20px auto; position: relative; background: #fff; overflow: hidden; }
+        .liquid { width: 100%; height: 50%; background: #e0e0e0; position: absolute; bottom: 0; transition: background 0.8s ease, height 0.5s ease; }
+        button { padding: 10px 15px; margin: 5px; font-weight: bold; cursor: pointer; border: none; border-radius: 5px; color: white; }
+        .acid { background: #ff4757; }
+        .base { background: #1e90ff; }
+        .reset { background: #2ed573; }
+        #result-text { font-weight: bold; margin-top: 15px; color: #2f3542; }
+    </style>
+</head>
+<body>
+
+    <div class="lab-card">
+        <h2>🧪 Virtual Chemistry Lab</h2>
+        <p>HSC ICT অধ্যায় ১ (ভার্চুয়াল রিয়েলিটি) & অধ্যায় ৪ (HTML/JS)</p>
+        
+        <div class="beaker">
+            <div id="liquid" class="liquid"></div>
+        </div>
+
+        <button class="acid" onclick="addAcid()">Acid (HCl) যোগ করো</button>
+        <button class="base" onclick="addBase()">Base (NaOH) যোগ করো</button>
+        <button class="reset" onclick="resetLab()">Reset Lab</button>
+
+        <p id="result-text">বিক্রিয়া পরীক্ষা করতে উপরের বাটনে চাপ দিন।</p>
+    </div>
+
+    <script>
+        function addAcid() {
+            document.getElementById('liquid').style.backgroundColor = '#ff4757';
+            document.getElementById('result-text').innerText = "দ্রবণটি অম্লীয় (Acidic) হয়েছে। দ্রবণটির বর্ণ লালচে!";
+        }
+        function addBase() {
+            document.getElementById('liquid').style.backgroundColor = '#1e90ff';
+            document.getElementById('result-text').innerText = "দ্রবণটি ক্ষারীয় (Basic) হয়েছে। দ্রবণটির বর্ণ নীল!";
+        }
+        function resetLab() {
+            document.getElementById('liquid').style.backgroundColor = '#e0e0e0';
+            document.getElementById('result-text').innerText = "বিক্রিয়া পরীক্ষা করতে উপরের বাটনে চাপ দিন।";
+        }
+    </script>
+
+</body>
+</html>
