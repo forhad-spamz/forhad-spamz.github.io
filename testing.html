@@ -3,181 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Smart Study Assistant - HSC ICT</title>
+    <title>Inclusive Education Portal for Visually Impaired</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f4f8;
             margin: 0;
             padding: 20px;
+            background-color: #f4f7f6;
+            color: #111;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* High Contrast Mode for Low Vision */
+        body.high-contrast {
+            background-color: #000000 !important;
+            color: #ffff00 !important; /* Yellow text on Black background */
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 3px solid #006a4e;
+        }
+
+        body.high-contrast .container {
+            background: #000000;
+            border: 3px solid #ffff00;
+            box-shadow: none;
+        }
+
+        h1 { text-align: center; font-size: 24px; }
+        p { font-size: 18px; line-height: 1.6; }
+
+        .accessibility-toolbar {
             display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
             justify-content: center;
         }
-        .container {
-            background: white;
-            width: 100%;
-            max-width: 600px;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            border-top: 6px solid #006a4e;
-        }
-        h2 { text-align: center; color: #006a4e; margin-bottom: 2px; }
-        .sub { text-align: center; color: #666; font-size: 13px; margin-bottom: 20px; }
-        
-        /* Tab Navigation */
-        .tab-menu { display: flex; gap: 10px; margin-bottom: 20px; }
-        .tab-btn {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #006a4e;
-            background: white;
-            color: #006a4e;
+
+        button, a.nav-btn {
+            padding: 12px 18px;
+            font-size: 16px;
             font-weight: bold;
-            border-radius: 6px;
             cursor: pointer;
-        }
-        .tab-btn.active { background: #006a4e; color: white; }
-
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-
-        /* Chatbot Box */
-        .chat-box {
-            height: 250px;
-            border: 1px solid #ddd;
+            border: 2px solid #006a4e;
+            background-color: #006a4e;
+            color: white;
             border-radius: 6px;
-            padding: 10px;
-            overflow-y: auto;
-            background: #fafafa;
-            margin-bottom: 10px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
         }
-        .chat-msg { margin: 8px 0; padding: 8px 12px; border-radius: 6px; font-size: 14px; }
-        .user-msg { background: #e2e8f0; text-align: right; margin-left: 20%; }
-        .ai-msg { background: #d1e7dd; color: #0f5132; text-align: left; margin-right: 20%; }
 
-        .input-group { display: flex; gap: 8px; }
-        .input-group input { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
-        .input-group button { background: #006a4e; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        body.high-contrast button, body.high-contrast a.nav-btn {
+            background-color: #ffff00;
+            color: #000000;
+            border: 2px solid #ffffff;
+        }
 
-        /* Quiz Box */
-        .q-block { margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
-        .q-title { font-weight: bold; margin-bottom: 8px; }
-        .opt-btn { display: block; background: #f8f9fa; border: 1px solid #ccc; padding: 8px; margin: 4px 0; border-radius: 5px; cursor: pointer; }
-        .submit-btn { width: 100%; background: #006a4e; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer; }
-        #quiz-res { margin-top: 15px; font-weight: bold; text-align: center; }
+        button:focus, a.nav-btn:focus {
+            outline: 4px solid #ff4757;
+        }
+
+        .lesson-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 6px;
+            background: #fafafa;
+        }
+
+        body.high-contrast .lesson-card {
+            background: #111;
+            border: 1px solid #ffff00;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>🤖 AI Smart Study Assistant</h2>
-    <div class="sub">HSC ICT বিজ্ঞান মেলা প্রজেক্ট - গ্রুপ ০৮</div>
 
-    <!-- Navigation Tabs -->
-    <div class="tab-menu">
-        <button class="tab-btn active" onclick="switchTab('chat')">AI ICT চ্যাটবট</button>
-        <button class="tab-btn" onclick="switchTab('quiz')">স্মার্ট কুইজ এসেসমেন্ট</button>
+    <!-- Accessibility Toolbar -->
+    <div class="accessibility-toolbar">
+        <button id="contrastBtn" onclick="toggleContrast()" onmouseover="speak('হাই কনট্রাস্ট মোড পরিবর্তন করুন')" onfocus="speak('হাই কনট্রাস্ট মোড পরিবর্তন করুন')">👁️ হাই কনট্রাস্ট মোড</button>
+        <button id="fontBtn" onclick="toggleFontSize()" onmouseover="speak('লেখা বড় বা ছোট করুন')" onfocus="speak('লেখা বড় বা ছোট করুন')">🔍 ফন্ট সাইজ বড় করুন</button>
     </div>
 
-    <!-- TAB 1: AI Chatbot -->
-    <div id="chat-tab" class="tab-content active">
-        <div class="chat-box" id="chat-box">
-            <div class="chat-msg ai-msg">🤖 আসসালামু আলাইকুম! আমি তোমার HSC ICT স্টাডি অ্যাসিস্ট্যান্ট। আমাকে ICT বইয়ের যেকোনো প্রশ্ন জিজ্ঞেস করো (যেমন: HTML কী?, বাইনারি মান, ই-লার্নিং)।</div>
-        </div>
-        <div class="input-group">
-            <input type="text" id="user-input" placeholder="ICT প্রশ্ন টাইপ করুন..." onkeypress="handleKeyPress(event)">
-            <button onclick="askAI()">জিজ্ঞেস করুন</button>
-        </div>
+    <h1 tabIndex="0" onmouseover="speak('ইনক্লুসিভ এডুকেশন পোর্টাল')" onfocus="speak('ইনক্লুসিভ এডুকেশন পোর্টাল')">🔊 দৃষ্টিপ্রতিবন্ধীদের জন্য স্মার্ট শিক্ষা পোর্টাল</h1>
+    
+    <p tabIndex="0" onmouseover="speak('এটি এইচএসসি আইসিটি বিজ্ঞান মেলার একটি এক্সেসিবল প্রজেক্ট। কিবোর্ডের ট্যাব বাটন চাপলে বা মাউস আনলে ওয়েবসাইটটি পড়ে শোনাবে।')" onfocus="speak('এটি এইচএসসি আইসিটি বিজ্ঞান মেলার একটি এক্সেসিবল প্রজেক্ট। কিবোর্ডের ট্যাব বাটন চাপলে বা মাউস আনলে ওয়েবসাইটটি পড়ে শোনাবে।')">
+        এই প্ল্যাটফর্মের মাধ্যমে দৃষ্টিপ্রতিবন্ধী ও স্বল্পদৃষ্টি সম্পন্ন শিক্ষার্থীরা সাউন্ড ও অ্যাক্সেসিবিলিটি টুলের সাহায্যে পড়াশোনা করতে পারবে।
+    </p>
+
+    <!-- Audio Lesson Sections -->
+    <div class="lesson-card">
+        <h2 tabIndex="0" onmouseover="speak('অধ্যায় ৪: ওয়েব ডিজাইন পরিচিতি অডিও লেসন')" onfocus="speak('অধ্যায় ৪: ওয়েব ডিজাইন পরিচিতি অডিও লেসন')">📖 অধ্যায় ৪: HTML ও ওয়েব ডিজাইন</h2>
+        <p tabIndex="0" onmouseover="speak('এইচটিএমএল এর মাধ্যমে ওয়েবসাইটের মূল কাঠামো তৈরি করা হয়। ওয়েব পেজ এক্সেসিবল করতে অল্টার ট্যাগ ব্যবহার করা গুরুত্বপূর্ণ।')" onfocus="speak('এইচটিএমএল এর মাধ্যমে ওয়েবসাইটের মূল কাঠামো তৈরি করা হয়। ওয়েব পেজ এক্সেসিবল করতে অল্টার ট্যাগ ব্যবহার করা গুরুত্বপূর্ণ।')">
+            এইচটিএমএল (HTML) এর সাহায্যে ওয়েবসাইটের মূল কাঠামো তৈরি করা হয়...
+        </p>
+        <button onclick="speak('অধ্যায় ৪ এর লেকচার শুরু হচ্ছে। এইচটিএমএল এর পূর্ণরূপ হলো হাইপার টেক্সট মার্কআপ ল্যাঙ্গুয়েজ।')" onmouseover="speak('অডিও প্লে করুন')" onfocus="speak('অডিও প্লে করুন')">▶️ অডিও লেকচার শুনুন</button>
     </div>
 
-    <!-- TAB 2: MCQ Quiz -->
-    <div id="quiz-tab" class="tab-content">
-        <div class="q-block">
-            <div class="q-title">১. কোনটি বিশ্বগ্রামের (Global Village) মূল ভিত্তি? (অধ্যায় ১)</div>
-            <label class="opt-btn"><input type="radio" name="q1" value="1"> ইন্টারনেট কানেক্টিভিটি</label>
-            <label class="opt-btn"><input type="radio" name="q1" value="0"> রিমোট কন্ট্রোল</label>
-        </div>
-
-        <div class="q-block">
-            <div class="q-title">২. HTML-এ টেবিল তৈরির ট্যাগ কোনটি? (অধ্যায় ৪)</div>
-            <label class="opt-btn"><input type="radio" name="q2" value="0"> &lt;tab&gt;</label>
-            <label class="opt-btn"><input type="radio" name="q2" value="1"> &lt;table&gt;</label>
-        </div>
-
-        <button class="submit-btn" onclick="evaluateQuiz()">মূল্যায়ন করুন</button>
-        <div id="quiz-res"></div>
+    <div class="lesson-card">
+        <h2 tabIndex="0" onmouseover="speak('অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি বিশ্ব ও বাংলাদেশ প্রেক্ষিত')" onfocus="speak('অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি বিশ্ব ও বাংলাদেশ প্রেক্ষিত')">📖 অধ্যায় ১: ই-লার্নিং ও আইসিটি</h2>
+        <p tabIndex="0" onmouseover="speak('আইসিটি ব্যবহারের মাধ্যমে সমাজের পিছিয়ে পড়া ও প্রতিবন্ধী শিক্ষার্থীরাও এখন ডিজিটাল শিক্ষায় অংশগ্রহণ করতে পারছে।')" onfocus="speak('আইসিটি ব্যবহারের মাধ্যমে সমাজের পিছিয়ে পড়া ও প্রতিবন্ধী শিক্ষার্থীরাও এখন ডিজিটাল শিক্ষায় অংশগ্রহণ করতে পারছে।')">
+            ই-লার্নিং প্রযুক্তি শিক্ষা ব্যবস্থার বৈষম্য দূর করতে সহায়তা করছে...
+        </p>
+        <button onclick="speak('অধ্যায় ১ এর লেকচার শুরু হচ্ছে। তথ্য প্রযুক্তির সাহায্যে শিক্ষা এখন সবার জন্য উন্মুক্ত।')" onmouseover="speak('অডিও প্লে করুন')" onfocus="speak('অডিও প্লে করুন')">▶️ অডিও লেকচার শুনুন</button>
     </div>
+
 </div>
 
 <script>
-    // Tab switching logic
-    function switchTab(tab) {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        
-        if(tab === 'chat') {
-            document.querySelectorAll('.tab-btn')[0].classList.add('active');
-            document.getElementById('chat-tab').classList.add('active');
+    // Text-to-Speech Engine Using Web Speech API
+    function speak(text) {
+        // Cancel ongoing speech
+        window.speechSynthesis.cancel();
+
+        let msg = new SpeechSynthesisUtterance();
+        msg.text = text;
+        msg.lang = 'bn-BD'; // Bangla Voice
+        msg.rate = 0.9; // Natural speed
+
+        window.speechSynthesis.speak(msg);
+    }
+
+    // High Contrast Logic
+    function toggleContrast() {
+        document.body.classList.toggle('high-contrast');
+        let isContrast = document.body.classList.contains('high-contrast');
+        speak(isContrast ? "হাই কনট্রাস্ট মোড চালু হয়েছে" : "সাধারণ মোড চালু হয়েছে");
+    }
+
+    // Font Resizing Logic
+    let isBig = false;
+    function toggleFontSize() {
+        if (!isBig) {
+            document.body.style.fontSize = "22px";
+            isBig = true;
+                speak("ফন্ট সাইজ বড় করা হয়েছে");
         } else {
-            document.querySelectorAll('.tab-btn')[1].classList.add('active');
-            document.getElementById('quiz-tab').classList.add('active');
+            document.body.style.fontSize = "16px";
+            isBig = false;
+            speak("ফন্ট সাইজ স্বাভাবিক করা হয়েছে");
         }
-    }
-
-    // AI Knowledge Base (Rule-based Bot)
-    const kb = {
-        "html": "HTML এর পূর্ণরূপ হলো HyperText Markup Language। এটি ওয়েবসাইট তৈরি করতে ব্যবহৃত হয় (অধ্যায় ৪)।",
-        "ই-লার্নিং": "ই-লার্নিং (E-Learning) হলো ইলেকট্রনিক প্রযুক্তির সাহায্যে দূরশিক্ষণ বা অনলাইন পড়ালেখার পদ্ধতি (অধ্যায় ১)।",
-        "বাইনারি": "বাইনারি হলো ২ ভিত্তিক সংখ্যা পদ্ধতি, যেখানে শুধুমাত্র ০ এবং ১ ব্যবহার করা হয় (অধ্যায় ৩)।",
-        "c": "C একটি পপুলার প্রোগ্রামিং ভাষা, যা ১৯৮০-র দশকে তৈরি হয় এবং এতে সি-কম্পাইলার ব্যবহার করা হয় (অধ্যায় ৫)।",
-        "লজিক গেট": "লজিক গেট হলো ডিজিটাল সার্কিটের মূল উপাদান যা দিয়ে বুলিয়ান লজিক বাস্তবায়ন করা হয় (অধ্যায় ৩)।"
-    };
-
-    function askAI() {
-        let input = document.getElementById('user-input');
-        let txt = input.value.trim().toLowerCase();
-        if(!txt) return;
-
-        let chatBox = document.getElementById('chat-box');
-        
-        // Render User Message
-        chatBox.innerHTML += `<div class="chat-msg user-msg">${input.value}</div>`;
-        input.value = '';
-
-        // Generate AI Answer
-        let reply = "দুঃখিত, আমি এই প্রশ্নটির উত্তর সরাসরি খুঁজে পাইনি। তবে এটি HSC ICT বইয়ের ১-৫ম অধ্যায়ের কোনো একটি টপিক।";
-        
-        for (let key in kb) {
-            if (txt.includes(key)) {
-                reply = kb[key];
-                break;
-            }
-        }
-
-        setTimeout(() => {
-            chatBox.innerHTML += `<div class="chat-msg ai-msg">🤖 ${reply}</div>`;
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }, 500);
-    }
-
-    function handleKeyPress(e) {
-        if(e.key === 'Enter') askAI();
-    }
-
-    function evaluateQuiz() {
-        let q1 = document.querySelector('input[name="q1"]:checked');
-        let q2 = document.querySelector('input[name="q2"]:checked');
-        let score = 0;
-
-        if(q1 && q1.value === "1") score++;
-        if(q2 && q2.value === "1") score++;
-
-        let res = document.getElementById('quiz-res');
-        res.innerHTML = `প্রাপ্ত নম্বর: ${score} / ২`;
-        res.style.color = score === 2 ? "green" : "red";
     }
 </script>
 
 </body>
-    </html>
+</html>
