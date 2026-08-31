@@ -3,69 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HSC ICT Unlimited Quiz Portal</title>
+    <title>Digital OMR Evaluator - HSC ICT Project</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f4f8;
+            background-color: #eef2f5;
             margin: 0;
             padding: 20px;
             display: flex;
             justify-content: center;
         }
-        .quiz-container {
+        .omr-card {
             background: white;
             width: 100%;
-            max-width: 600px;
+            max-width: 550px;
             padding: 25px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border-top: 6px solid #006a4e;
         }
-        h2 { text-align: center; color: #006a4e; margin-bottom: 5px; }
-        .subtitle { text-align: center; color: #666; font-size: 14px; margin-bottom: 25px; }
+        h2 { text-align: center; color: #006a4e; margin-bottom: 2px; }
+        .sub { text-align: center; color: #666; font-size: 13px; margin-bottom: 20px; }
         
-        .question-block {
-            margin-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 15px;
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #ddd;
         }
-        .question-title {
+        .q-num { font-weight: bold; width: 60px; color: #333; }
+        .bubbles { display: flex; gap: 15px; }
+        
+        /* OMR Bubble Design */
+        .bubble {
+            width: 28px;
+            height: 28px;
+            border: 2px solid #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
             font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-        .option-btn {
-            display: block;
-            width: 100%;
-            text-align: left;
-            background: #f8f9fa;
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin: 6px 0;
-            border-radius: 6px;
             cursor: pointer;
-            box-sizing: border-box;
+            user-select: none;
+            background: white;
+            transition: 0.2s;
         }
-        .option-btn:hover { background: #e2e8f0; }
-        
-        .submit-btn {
-            width: 100%;
-            background-color: #006a4e;
+        .bubble.filled {
+            background: #222;
             color: white;
-            border: none;
+            border-color: #222;
+        }
+
+        .btn {
+            width: 100%;
+            background: #006a4e;
+            color: white;
             padding: 12px;
+            border: none;
+            border-radius: 6px;
             font-size: 16px;
             font-weight: bold;
-            border-radius: 6px;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 20px;
         }
-        .submit-btn:hover { background-color: #004d39; }
-        
-        #result-area {
+        .btn:hover { background: #004d39; }
+
+        #omr-result {
             margin-top: 20px;
             padding: 15px;
-            border-radius: 6px;
+            border-radius: 8px;
             display: none;
             text-align: center;
         }
@@ -73,90 +82,132 @@
 </head>
 <body>
 
-    <div class="quiz-container">
-        <h2>HSC ICT অনলাইন এক্সাম</h2>
-        <p class="subtitle">বিজ্ঞান মেলা প্রজেক্ট - গ্রুপ ০৮</p>
+<div class="omr-card">
+    <h2>🎯 Digital OMR Sheet Evaluator</h2>
+    <div class="sub">HSC ICT বিজ্ঞান মেলা প্রজেক্ট - অটোমেটেড ওএমআর খাতা মূল্যায়ন</div>
 
-        <form id="quizForm">
-            <!-- প্রশ্ন ১ -->
-            <div class="question-block">
-                <div class="question-title">১. HTML-এ ছবি যুক্ত করার সঠিক ট্যাগ কোনটি? (অধ্যায় ৪)</div>
-                <label class="option-btn"><input type="radio" name="q1" value="0"> &lt;image src="..."&gt;</label>
-                <label class="option-btn"><input type="radio" name="q1" value="1"> &lt;img src="..."&gt;</label>
-                <label class="option-btn"><input type="radio" name="q1" value="0"> &lt;pic src="..."&gt;</label>
-            </div>
-
-            <!-- প্রশ্ন ২ -->
-            <div class="question-block">
-                <div class="question-title">২. বাইনারি (1010)₂ এর দশমিক (Decimal) মান কত? (অধ্যায় ৩)</div>
-                <label class="option-btn"><input type="radio" name="q2" value="0"> ৮</label>
-                <label class="option-btn"><input type="radio" name="q2" value="1"> ১০</label>
-                <label class="option-btn"><input type="radio" name="q2" value="0"> ১২</label>
-            </div>
-
-            <!-- প্রশ্ন ৩ -->
-            <div class="question-block">
-                <div class="question-title">৩. ই-লার্নিং কনসেপ্টটি ICT বইয়ের কোন অধ্যায়ের অংশ? (অধ্যায় ১)</div>
-                <label class="option-btn"><input type="radio" name="q3" value="1"> ১ম অধ্যায়</label>
-                <label class="option-btn"><input type="radio" name="q3" value="0"> ৩য় অধ্যায়</label>
-                <label class="option-btn"><input type="radio" name="q3" value="0"> ৫ম অধ্যায়</label>
-            </div>
-
-            <!-- প্রশ্ন ৪ -->
-            <div class="question-block">
-                <div class="question-title">৪. C-প্রোগ্রামিং ভাষায় আউটপুট দেখানোর জন্য কোনটি ব্যবহার করা হয়? (অধ্যায় ৫)</div>
-                <label class="option-btn"><input type="radio" name="q4" value="0"> scanf()</label>
-                <label class="option-btn"><input type="radio" name="q4" value="1"> printf()</label>
-                <label class="option-btn"><input type="radio" name="q4" value="0"> main()</label>
-            </div>
-
-            <!-- প্রশ্ন ৫ -->
-            <div class="question-block">
-                <div class="question-title">৫. লজিক গেট AND-এর আউটপুট ১ হবে যখন— (অধ্যায় ৩)</div>
-                <label class="option-btn"><input type="radio" name="q5" value="0"> যেকোনো একটি ইনপুট ১ হয়</label>
-                <label class="option-btn"><input type="radio" name="q5" value="1"> সবকটি ইনপুট ১ হয়</label>
-                <label class="option-btn"><input type="radio" name="q5" value="0"> সবকটি ইনপুট ০ হয়</label>
-            </div>
-
-            <!-- আরও প্রশ্ন যোগ করতে চাইলে এই অংশটি কপি করে নিচে বসিয়ে নাম (q6, q7...) বদলে দেবেন -->
-
-            <button type="button" class="submit-btn" onclick="calculateScore()">ফলাফল বিশ্লেষণ করুণ</button>
-        </form>
-
-        <div id="result-area"></div>
+    <!-- OMR Question 1 -->
+    <div class="row" data-q="1">
+        <span class="q-num">প্রশ্ন ১:</span>
+        <div class="bubbles">
+            <div class="bubble" onclick="fillBubble(this)">ক</div>
+            <div class="bubble" onclick="fillBubble(this)">খ</div>
+            <div class="bubble" onclick="fillBubble(this)">গ</div>
+            <div class="bubble" onclick="fillBubble(this)">ঘ</div>
+        </div>
     </div>
 
-    <script>
-        function calculateScore() {
-            // সঠিক উত্তরের লিস্ট (এখানে প্রতিটি প্রশ্নের সঠিক অপশন ধরে দেওয়া আছে)
-            const correctAnswers = { q1: "1", q2: "1", q3: "1", q4: "1", q5: "1" };
-            
-            let score = 0;
-            let totalQuestions = Object.keys(correctAnswers).length;
+    <!-- OMR Question 2 -->
+    <div class="row" data-q="2">
+        <span class="q-num">প্রশ্ন ২:</span>
+        <div class="bubbles">
+            <div class="bubble" onclick="fillBubble(this)">ক</div>
+            <div class="bubble" onclick="fillBubble(this)">খ</div>
+            <div class="bubble" onclick="fillBubble(this)">গ</div>
+            <div class="bubble" onclick="fillBubble(this)">ঘ</div>
+        </div>
+    </div>
 
-            for (let q in correctAnswers) {
-                let selectedOption = document.querySelector(`input[name="${q}"]:checked`);
-                if (selectedOption && selectedOption.value === correctAnswers[q]) {
-                    score++;
-                }
-            }
+    <!-- OMR Question 3 -->
+    <div class="row" data-q="3">
+        <span class="q-num">প্রশ্ন ৩:</span>
+        <div class="bubbles">
+            <div class="bubble" onclick="fillBubble(this)">ক</div>
+            <div class="bubble" onclick="fillBubble(this)">খ</div>
+            <div class="bubble" onclick="fillBubble(this)">গ</div>
+            <div class="bubble" onclick="fillBubble(this)">ঘ</div>
+        </div>
+    </div>
 
-            let resultDiv = document.getElementById("result-area");
-            resultDiv.style.display = "block";
+    <!-- OMR Question 4 -->
+    <div class="row" data-q="4">
+        <span class="q-num">প্রশ্ন ৪:</span>
+        <div class="bubbles">
+            <div class="bubble" onclick="fillBubble(this)">ক</div>
+            <div class="bubble" onclick="fillBubble(this)">খ</div>
+            <div class="bubble" onclick="fillBubble(this)">গ</div>
+            <div class="bubble" onclick="fillBubble(this)">ঘ</div>
+        </div>
+    </div>
 
-            let percentage = (score / totalQuestions) * 100;
+    <!-- OMR Question 5 -->
+    <div class="row" data-q="5">
+        <span class="q-num">প্রশ্ন ৫:</span>
+        <div class="bubbles">
+            <div class="bubble" onclick="fillBubble(this)">ক</div>
+            <div class="bubble" onclick="fillBubble(this)">খ</div>
+            <div class="bubble" onclick="fillBubble(this)">গ</div>
+            <div class="bubble" onclick="fillBubble(this)">ঘ</div>
+        </div>
+    </div>
 
-            if (percentage >= 80) {
-                resultDiv.style.background = "#d4edda";
-                resultDiv.style.color = "#155724";
-                resultDiv.innerHTML = `<h3>🎉 চমৎকার রেজাল্ট!</h3> প্রাপ্ত নম্বর: <strong>${score} / ${totalQuestions}</strong> (${percentage}%)`;
-            } else {
-                resultDiv.style.background = "#fff3cd";
-                resultDiv.style.color = "#856404";
-                resultDiv.innerHTML = `<h3>⚠️ আরও ভালো করতে হবে!</h3> প্রাপ্ত নম্বর: <strong>${score} / ${totalQuestions}</strong> (${percentage}%)`;
-            }
+    <button class="btn" onclick="evaluateOMR()">OMR খাতা স্ক্যান ও স্কোয়ার মূল্যায়ন করুন</button>
+
+    <div id="omr-result"></div>
+</div>
+
+<script>
+    // সঠিক উত্তরপত্র সেট (ক=0, খ=1, গ=2, ঘ=3)
+    const answerKey = {
+        1: 1, // প্রশ্ন ১ এর সঠিক উত্তর: খ
+        2: 2, // প্রশ্ন ২ এর সঠিক উত্তর: গ
+        3: 0, // প্রশ্ন ৩ এর সঠিক উত্তর: ক
+        4: 1, // প্রশ্ন ৪ এর সঠিক উত্তর: খ
+        5: 3  // প্রশ্ন ৫ এর সঠিক উত্তর: ঘ
+    };
+
+    // ওএমআর বৃত্ত ভরাট করার লজিক
+    function fillBubble(el) {
+        let parent = el.parentElement;
+        let bubbles = parent.getElementsByClassName('bubble');
+        
+        // একই প্রশ্নের অন্য বৃত্ত খালি করা
+        for (let b of bubbles) {
+            b.classList.remove('filled');
         }
-    </script>
+        
+        // নির্বাচিত বৃত্তটি কালো করা
+        el.classList.add('filled');
+    }
+
+    // অটোমেটিক খাতা মূল্যায়ন লজিক
+    function evaluateOMR() {
+        let score = 0;
+        let rows = document.querySelectorAll('.row');
+        let unattempted = 0;
+
+        rows.forEach(row => {
+            let qNum = row.getAttribute('data-q');
+            let bubbles = row.querySelectorAll('.bubble');
+            let selectedIndex = -1;
+
+            bubbles.forEach((b, index) => {
+                if (b.classList.contains('filled')) {
+                    selectedIndex = index;
+                }
+            });
+
+            if (selectedIndex === -1) {
+                unattempted++;
+            } else if (selectedIndex === answerKey[qNum]) {
+                score++;
+            }
+        });
+
+        let resultDiv = document.getElementById('omr-result');
+        resultDiv.style.display = 'block';
+
+        if (unattempted > 0) {
+            resultDiv.style.background = '#fff3cd';
+            resultDiv.style.color = '#856404';
+            resultDiv.innerHTML = `⚠️ আপনি <strong>${unattempted}টি</strong> প্রশ্নের বৃত্ত ভরাট করেননি।<br>বর্তমান প্রাপ্ত নম্বর: <strong>${score} / 5</strong>`;
+        } else {
+            resultDiv.style.background = '#d4edda';
+            resultDiv.style.color = '#155724';
+            resultDiv.innerHTML = `✅ <strong>OMR স্ক্যান সফল!</strong><br>আপনার প্রাপ্ত নম্বর: <strong>${score} / 5</strong>`;
+        }
+    }
+</script>
 
 </body>
-  </html>
+    </html>
