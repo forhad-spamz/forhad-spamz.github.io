@@ -2,77 +2,125 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <title>Logic Gate Simulator - HSC ICT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cipher Encryption Portal - HSC ICT</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #eef2f5; padding: 20px; display: flex; justify-content: center; }
-        .card { background: white; width: 100%; max-width: 500px; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-top: 5px solid #006a4e; }
-        h2 { color: #006a4e; text-align: center; }
-        .input-group { margin: 15px 0; }
-        select, button { width: 100%; padding: 10px; margin-top: 5px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; }
-        button { background: #006a4e; color: white; font-weight: bold; cursor: pointer; margin-top: 15px; }
-        .result { margin-top: 20px; padding: 15px; background: #e8f5e9; border-radius: 5px; text-align: center; font-size: 18px; font-weight: bold; color: #2e7d32; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .card {
+            background: white;
+            width: 100%;
+            max-width: 550px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border-top: 6px solid #006a4e;
+        }
+        h2 { text-align: center; color: #006a4e; margin-bottom: 2px; }
+        .sub { text-align: center; color: #666; font-size: 13px; margin-bottom: 20px; }
+        
+        label { font-weight: bold; color: #333; display: block; margin-top: 10px; }
+        textarea, input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-radius;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+        
+        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+        }
+        .encrypt-btn { background-color: #006a4e; }
+        .decrypt-btn { background-color: #0056b3; }
+        
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #eef2f5;
+            border-radius: 6px;
+            border-left: 4px solid #006a4e;
+            word-break: break-all;
+        }
+        .result-title { font-weight: bold; color: #333; margin-bottom: 5px; }
+        #output-text { font-size: 16px; color: #d63031; font-family: monospace; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h2>⚡ Digital Logic Gate Simulator</h2>
-    <p style="text-align: center; color: #666;">C-Programming Logic & HTML Interface</p>
+    <h2>🔐 Secret Message Encryptor</h2>
+    <div class="sub">HSC ICT অধ্যায় ১ (সাইবার সিকিউরিটি) & অধ্যায় ৫ (C ASCII Loop Logic)</div>
 
-    <div class="input-group">
-        <label>লজিক গেট নির্বাচন করুন:</label>
-        <select id="gate">
-            <option value="AND">AND Gate (&&)</option>
-            <option value="OR">OR Gate (||)</option>
-            <option value="NAND">NAND Gate</option>
-            <option value="NOR">NOR Gate</option>
-            <option value="XOR">XOR Gate</option>
-        </select>
+    <label>আপনার মেসেজ/লেখা দিন:</label>
+    <textarea id="inputText" rows="3" placeholder="এখানে ইংরেজি টেক্সট লিখুন (যেমন: Hello ICT)..."></textarea>
+
+    <label>সিক্রেট কি (Shift Key/নম্বর):</label>
+    <input type="number" id="shiftKey" value="3" min="1" max="25">
+
+    <div class="btn-group">
+        <button class="btn encrypt-btn" onclick="processText('encrypt')">🔒 Encrypt (গোপন করুন)</button>
+        <button class="btn decrypt-btn" onclick="processText('decrypt')">🔓 Decrypt (উদ্ধার করুন)</button>
     </div>
 
-    <div class="input-group">
-        <label>ইনপুট A (0 অথবা 1):</label>
-        <select id="inputA">
-            <option value="0">0 (LOW)</option>
-            <option value="1">1 (HIGH)</option>
-        </select>
+    <div class="result-box">
+        <div class="result-title">ফলাফল (Output):</div>
+        <div id="output-text">ফলাফল এখানে দেখাবে...</div>
     </div>
-
-    <div class="input-group">
-        <label>ইনপুট B (0 অথবা 1):</label>
-        <select id="inputB">
-            <option value="0">0 (LOW)</option>
-            <option value="1">1 (HIGH)</option>
-        </select>
-    </div>
-
-    <button onclick="calculateGate()">আউটপুট নির্ণয় করুন</button>
-
-    <div id="output" class="result">আউটপুট: -</div>
 </div>
 
 <script>
-    // C Programming Logic implemented in JS
-    function calculateGate() {
-        int_a = parseInt(document.getElementById("inputA").value); // C type casting
-        int_b = parseInt(document.getElementById("inputB").value);
-        gate = document.getElementById("gate").value;
-        let output = 0;
+    // C Programming Logic for Caesar Cipher
+    function processText(action) {
+        let text = document.getElementById("inputText").value;
+        let key = parseInt(document.getElementById("shiftKey").value);
+        let output = "";
 
-        // C Programming Conditional Logic (if-else)
-        if (gate === "AND") {
-            output = (int_a && int_b) ? 1 : 0;
-        } else if (gate === "OR") {
-            output = (int_a || int_b) ? 1 : 0;
-        } else if (gate === "NAND") {
-            output = !(int_a && int_b) ? 1 : 0;
-        } else if (gate === "NOR") {
-            output = !(int_a || int_b) ? 1 : 0;
-        } else if (gate === "XOR") {
-            output = (int_a !== int_b) ? 1 : 0;
+        if (!text) {
+            document.getElementById("output-text").innerText = "দয়া করে কোনো টেক্সট টাইপ করুন!";
+            return;
         }
 
-        document.getElementById("output").innerHTML = "আউটপুট (Output): " + output;
+        if (action === 'decrypt') {
+            key = (26 - key) % 26; // C Reverse Shift Logic
+        }
+
+        // C Programming Loop and ASCII Value Logic
+        for (let i = 0; i < text.length; i++) {
+            let ch = text.charCodeAt(i); // Equivalent to C (int)char ASCII value
+
+            // Uppercase Characters (A-Z: 65-90)
+            if (ch >= 65 && ch <= 90) {
+                output += String.fromCharCode((ch - 65 + key) % 26 + 65);
+            }
+            // Lowercase Characters (a-z: 97-122)
+            else if (ch >= 97 && ch <= 122) {
+                output += String.fromCharCode((ch - 97 + key) % 26 + 97);
+            }
+            // Other symbols/numbers stay same
+            else {
+                output += text.charAt(i);
+            }
+        }
+
+        document.getElementById("output-text").innerText = output;
     }
 </script>
 
