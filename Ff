@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shiksha BD - Smart Education Portal</title>
+    <style>
+        /* CSS Styling (HSC ICT ৪র্থ অধ্যায়ের স্টাইলিং অংশ) */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        /* Header Area */
+        header {
+            background-color: #006a4e; /* Bangladesh Green */
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* Navigation Menu */
+        nav {
+            background-color: #f42a41; /* Bangladesh Red accent */
+            display: flex;
+            justify-content: center;
+        }
+
+        nav a {
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            background-color: #333;
+        }
+
+        /* Main Container */
+        .container {
+            width: 85%;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        /* Feature Cards Section */
+        .features {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            flex: 1;
+            min-width: 250px;
+            background: #e8f5e9;
+            padding: 15px;
+            border-left: 5px solid #006a4e;
+            border-radius: 5px;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #006a4e;
+            color: white;
+        }
+
+        /* Form Styling */
+        form {
+            background: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        input[type="text"], input[type="email"], select {
+            width: 98%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #006a4e;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #004d39;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            background: #333;
+            color: white;
+            padding: 10px 0;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Smart Education Portal BD</h1>
+        <p>HSC ICT প্রজেক্ট: শিক্ষায় তথ্যে ও প্রযুক্তির ব্যবহার</p>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#about">মূল উদ্দেশ্য</a>
+        <a href="#resources">রিসোর্স</a>
+        <a href="#routine">ক্লাস রুটিন</a>
+        <a href="#register">রেজিস্ট্রেশন</a>
+    </nav>
+
+    <div class="container">
+        
+        <!-- About Section -->
+        <section id="about">
+            <h2>প্রজেক্টের মূল উদ্দেশ্য</h2>
+            <p>আমাদের লক্ষ্য হলো বাংলাদেশের শহর ও গ্রামের শিক্ষার্থীদের জন্য একটি সমন্বিত <strong>ডিজিটাল ই-লার্নিং প্ল্যাটফর্ম</strong> ডেমো প্রদর্শন করা।</p>
+            
+            <div class="features">
+                <div class="card">
+                    <h3>📚 ই-বুক ও নোটস</h3>
+                    <p>একাদশ-দ্বাদশ শ্রেণির সকল বিষয়ের অধ্যায়ভিত্তিক লেকচার শিট ও ই-বুক।</p>
+                </div>
+                <div class="card">
+                    <h3>💻 স্মার্ট ল্যাব ডেমো</h3>
+                    <p>অনলাইনে ভার্চুয়াল ল্যাবের মাধ্যমে আইসিটি ও বিজ্ঞান বিষয় হাতে-কলমে শেখা।</p>
+                </div>
+                <div class="card">
+                    <h3>📝 অনলাইন এসেসমেন্ট</h3>
+                    <p>স্বয়ংক্রিয় কুইজ এবং তৎক্ষণাৎ ফলাফল পর্যালোচনা করার ব্যবস্থা।</p>
+                </div>
+            </div>
+        </section>
+
+        <hr style="margin: 30px 0; border: 0.5px solid #eee;">
+
+        <!-- Resources Section (List Example) -->
+        <section id="resources">
+            <h2>উপলব্ধ বিষয়সমূহ (Subject Lists)</h2>
+            <ul>
+                <li><strong>তথ্য ও যোগাযোগ প্রযুক্তি (ICT)</strong>
+                    <ol>
+                        <li>অধ্যায় ৩: সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস</li>
+                        <li>অধ্যায় ৪: ওয়েব ডিজাইন ও HTML</li>
+                        <li>অধ্যায় ৫: প্রোগ্রামিং ভাষা (C)</li>
+                    </ol>
+                </li>
+                <li><strong>পদার্থবিজ্ঞান (Physics)</strong></li>
+                <li><strong>রসায়ন (Chemistry)</strong></li>
+            </ul>
+        </section>
+
+        <hr style="margin: 30px 0; border: 0.5px solid #eee;">
+
+        <!-- Table Section (HSC ICT Table Tag Example) -->
+        <section id="routine">
+            <h2>অনলাইন লাইভ ক্লাস সময়সূচী</h2>
+            <table>
+                <tr>
+                    <th>বার (Day)</th>
+                    <th>বিষয় (Subject)</th>
+                    <th>সময় (Time)</th>
+                    <th>শিক্ষক (Instructor)</th>
+                </tr>
+                <tr>
+                    <td>রবিবার</td>
+                    <td>ICT (HTML)</td>
+                    <td>১০:০০ AM</td>
+                    <td>ইঞ্জিনিয়ার রাজিব</td>
+                </tr>
+                <tr>
+                    <td>মঙ্গলবার</td>
+                    <td>Physics</td>
+                    <td>১১:৩০ AM</td>
+                    <td>ড. আহসান হাবিব</td>
+                </tr>
+                <tr>
+                    <td>বৃহস্পতিবার</td>
+                    <td>C Programming</td>
+                    <td>০৩:০০ PM</td>
+                    <td>ইঞ্জিনিয়ার রাজিব</td>
+                </tr>
+            </table>
+        </section>
+
+        <hr style="margin: 30px 0; border: 0.5px solid #eee;">
+
+        <!-- Form Section (HSC ICT Form Tag Example) -->
+        <section id="register">
+            <h2>ফ্রি স্মার্ট আইডি তৈরি করুণ (Student Registration)</h2>
+            <form action="#" method="post">
+                <label for="name">শিক্ষার্থীর নাম:</label>
+                <input type="text" id="name" name="student_name" placeholder="আপনার পুরো নাম লিখুন..." required>
+
+                <label for="email">ইমেইল ঠিকানা:</label>
+                <input type="email" id="email" name="student_email" placeholder="example@mail.com" required>
+
+                <label for="class">শ্রেণি নির্বাচন করুন:</label>
+                <select id="class" name="student_class">
+                    <option value="11">একাদশ শ্রেণি (Class 11)</option>
+                    <option value="12">দ্বাদশ শ্রেণি (Class 12)</option>
+                </select>
+
+                <input type="submit" value="রেজিস্ট্রেশন সম্পূর্ণ করুন">
+            </form>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Smart Education BD Project | বিজ্ঞান মেলা গ্রুপ আইডি: 08</p>
+    </footer>
+
+</body>
+</html>
