@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>বাড়বকুণ্ড হাই স্কুল অ্যান্ড কলেজ | জ্ঞানই আলো</title>
+<meta name="description" content="বাড়বকুণ্ড হাই স্কুল অ্যান্ড কলেজ — সীতাকুণ্ড, চট্টগ্রাম। স্থাপিত ১৯৫৬। শিক্ষাই আলো, উদ্ভাবনেই ভবিষ্যৎ।" />
+<meta name="theme-color" content="#0b4a8f" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --blue-900:#083766; --blue-700:#0b4a8f; --blue-500:#1273c8; --blue-100:#e7f1fb;
+    --sun:#e23b2e; --sun-soft:#ff6a3d; --green-600:#1f9d55; --green-100:#e6f6ec;
+    --ink:#16232e; --muted:#5c6b78; --line:#e2e8ee; --bg:#f6f9fc; --white:#ffffff; --gold:#f4b731;
+    --radius:16px; --shadow-sm:0 2px 8px rgba(8,55,102,.08); --shadow-md:0 12px 34px rgba(8,55,102,.14); --maxw:1200px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;background:var(--bg)}
+  body{font-family:'Hind Siliguri',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;overflow-x:hidden}
+  h1,h2,h3,.display{font-family:'Baloo Da 2','Hind Siliguri',sans-serif;line-height:1.25}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  section{scroll-margin-top:84px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.6rem;border-radius:999px;font-weight:600;font-size:1rem;cursor:pointer;border:none;transition:.25s transform,.25s box-shadow,.25s background}
+  .btn-primary{background:linear-gradient(120deg,var(--sun),var(--sun-soft));color:#fff;box-shadow:0 10px 26px rgba(226,59,46,.35)}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(226,59,46,.45)}
+  .btn-ghost{background:rgba(255,255,255,.14);color:#fff;border:1.5px solid rgba(255,255,255,.5)}
+  .btn-ghost:hover{background:rgba(255,255,255,.24);transform:translateY(-3px)}
+  .section-head{text-align:center;max-width:640px;margin:0 auto 48px}
+  .eyebrow{display:inline-block;color:var(--blue-700);background:var(--blue-100);font-weight:600;font-size:.85rem;padding:.35rem 1rem;border-radius:999px;letter-spacing:.5px}
+  .section-head h2{font-size:clamp(1.7rem,4vw,2.6rem);margin:.7rem 0 .5rem;color:var(--blue-900)}
+  .section-head p{color:var(--muted)}
+  .pad{padding:88px 0}
+  header.nav{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{display:flex;align-items:center;gap:.75rem}
+  .brand img{width:46px;height:46px;border-radius:50%;box-shadow:var(--shadow-sm)}
+  .brand .txt strong{display:block;font-family:'Baloo Da 2';font-size:1.05rem;color:var(--blue-900);line-height:1.2}
+  .brand .txt span{font-size:.72rem;color:var(--muted);letter-spacing:.3px}
+  nav ul{list-style:none;display:flex;gap:.4rem;align-items:center}
+  nav a{padding:.55rem .9rem;border-radius:10px;font-weight:500;color:var(--ink);transition:.2s;position:relative}
+  nav a:hover{color:var(--blue-700);background:var(--blue-100)}
+  .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+  .hamburger span{width:26px;height:3px;background:var(--blue-900);border-radius:3px;transition:.3s}
+  .hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+  .hamburger.open span:nth-child(2){opacity:0}
+  .hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+  @media(max-width:920px){
+    .hamburger{display:flex}
+    nav{position:fixed;inset:72px 0 auto 0;background:#fff;border-bottom:1px solid var(--line);max-height:0;overflow:hidden;transition:max-height .35s ease;box-shadow:var(--shadow-md)}
+    nav.open{max-height:420px}
+    nav ul{flex-direction:column;align-items:stretch;padding:12px 20px 20px;gap:.2rem}
+    nav a{padding:.9rem 1rem;border-radius:12px}
+  }
+  .hero{position:relative;min-height:92vh;display:flex;align-items:center;color:#fff;overflow:hidden}
+  .hero .bg{position:absolute;inset:0;background:linear-gradient(120deg,rgba(8,55,102,.92),rgba(11,74,143,.62) 55%,rgba(31,157,85,.35)),url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1788201224026-PCQSo6RWZCANeSY1DJYejpFOjQdnwB.png') center/cover no-repeat;transform:scale(1.08);animation:kenburns 18s ease-in-out infinite alternate}
+  @keyframes kenburns{to{transform:scale(1.18) translateY(-10px)}}
+  .hero-content{position:relative;z-index:2;max-width:720px;padding:120px 0}
+  .hero .chip{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);padding:.4rem 1rem;border-radius:999px;font-size:.85rem;margin-bottom:1.2rem}
+  .hero h1{font-size:clamp(2.2rem,6vw,4rem);font-weight:800;text-shadow:0 4px 24px rgba(0,0,0,.35)}
+  .hero h1 .accent{background:linear-gradient(120deg,var(--gold),var(--sun-soft));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.sub{font-size:clamp(1.05rem,2.2vw,1.3rem);margin:1.2rem 0 2rem;color:rgba(255,255,255,.9);max-width:560px}
+  .hero .cta{display:flex;gap:1rem;flex-wrap:wrap}
+  .hero-stats{display:flex;gap:2.4rem;margin-top:3rem;flex-wrap:wrap}
+  .hero-stats .num{font-family:'Baloo Da 2';font-size:2rem;font-weight:700;color:var(--gold)}
+  .hero-stats small{color:rgba(255,255,255,.8)}
+  .notice-strip{background:var(--blue-900);color:#fff;display:flex;align-items:center;overflow:hidden}
+  .notice-strip .tag{background:var(--sun);padding:.9rem 1.4rem;font-weight:700;white-space:nowrap;display:flex;align-items:center;gap:.5rem;z-index:2}
+  .marquee{overflow:hidden;flex:1;position:relative}
+  .marquee ul{display:flex;gap:3rem;list-style:none;white-space:nowrap;padding:.9rem 2rem;animation:scroll 26s linear infinite}
+  .marquee:hover ul{animation-play-state:paused}
+  .marquee li{display:flex;align-items:center;gap:.5rem}
+  .marquee li::before{content:'●';color:var(--gold);font-size:.6rem}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .notice-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+  .ncard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow-sm);transition:.25s;position:relative;overflow:hidden}
+  .ncard::before{content:'';position:absolute;top:0;left:0;width:5px;height:100%;background:var(--accent,var(--blue-500))}
+  .ncard:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+  .ncard .date{display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--muted);margin-bottom:.6rem}
+  .ncard .badge{position:absolute;top:20px;right:20px;font-size:.7rem;font-weight:600;padding:.25rem .7rem;border-radius:999px}
+  .b-exam{background:#fdeceb;color:var(--sun)}
+  .b-admit{background:var(--green-100);color:var(--green-600)}
+  .b-event{background:#fff3d6;color:#b6820a}
+  .ncard h4{color:var(--blue-900);font-size:1.15rem;margin-bottom:.4rem}
+  .ncard p{color:var(--muted);font-size:.94rem}
+  .dept-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px}
+  .dept{position:relative;border-radius:20px;overflow:hidden;color:#fff;min-height:320px;display:flex;align-items:flex-end;box-shadow:var(--shadow-md);transition:.3s}
+  .dept:hover{transform:translateY(-8px)}
+  .dept .dbg{position:absolute;inset:0;transition:.5s;transform:scale(1)}
+  .dept:hover .dbg{transform:scale(1.1)}
+  .dept .overlay{position:absolute;inset:0}
+  .dept .body{position:relative;z-index:2;padding:28px}
+  .dept .icon{width:56px;height:56px;border-radius:14px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:14px}
+  .dept h3{font-size:1.5rem}
+  .dept p{color:rgba(255,255,255,.9);font-size:.95rem;margin-top:.4rem}
+  .dept .subjects{margin-top:1rem;display:flex;flex-wrap:wrap;gap:.4rem}
+  .dept .subjects span{font-size:.78rem;background:rgba(255,255,255,.18);padding:.25rem .7rem;border-radius:999px;border:1px solid rgba(255,255,255,.3)}
+  .sci .dbg{background:linear-gradient(135deg,#0b4a8f,#1273c8)} .sci .overlay{background:linear-gradient(0deg,rgba(8,55,102,.85),transparent)}
+  .hum .dbg{background:linear-gradient(135deg,#b6820a,#f4b731)} .hum .overlay{background:linear-gradient(0deg,rgba(120,80,0,.75),transparent)}
+  .biz .dbg{background:linear-gradient(135deg,#127a4a,#25b56a)} .biz .overlay{background:linear-gradient(0deg,rgba(10,80,45,.8),transparent)}
+  .principal{background:linear-gradient(135deg,var(--blue-900),var(--blue-700));color:#fff;border-radius:26px;display:grid;grid-template-columns:300px 1fr;gap:0;overflow:hidden;box-shadow:var(--shadow-md)}
+  .principal .photo{position:relative;min-height:360px;background:linear-gradient(160deg,#1273c8,#083766);display:flex;align-items:center;justify-content:center}
+  .principal .photo .ring{width:190px;height:190px;border-radius:50%;background:rgba(255,255,255,.12);border:3px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;font-size:4.5rem}
+  .principal .photo .name{position:absolute;bottom:20px;left:0;right:0;text-align:center}
+  .principal .photo .name strong{display:block;font-family:'Baloo Da 2';font-size:1.15rem}
+  .principal .photo .name span{font-size:.8rem;color:rgba(255,255,255,.75)}
+  .principal .msg{padding:44px}
+  .principal .quote{font-size:3rem;color:var(--gold);line-height:1;font-family:'Baloo Da 2'}
+  .principal .msg p{color:rgba(255,255,255,.9);font-size:1.05rem;margin:.6rem 0 1.4rem}
+  @media(max-width:760px){.principal{grid-template-columns:1fr}}
+  .gpa-wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+  .gpa-card{background:#fff;border-radius:22px;padding:36px;box-shadow:var(--shadow-md);border:1px solid var(--line)}
+  .gpa-card label{font-weight:600;display:block;margin-bottom:.5rem;color:var(--blue-900)}
+  .gpa-card select,.gpa-card input{width:100%;padding:.9rem 1rem;border-radius:12px;border:1.5px solid var(--line);font-family:inherit;font-size:1rem;margin-bottom:1.2rem;transition:.2s;background:var(--bg)}
+  .gpa-card input:focus,.gpa-card select:focus{outline:none;border-color:var(--blue-500);box-shadow:0 0 0 4px var(--blue-100)}
+  .gpa-card .btn-primary{width:100%;justify-content:center}
+  #gpaResult{margin-top:1.4rem}
+  .result-box{border-radius:14px;padding:20px;animation:pop .35s ease}
+  @keyframes pop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .result-ok{background:var(--green-100);border:1px solid #b6e6c8}
+  .result-no{background:#fdeceb;border:1px solid #f6c6c1}
+  .result-box h4{margin-bottom:.4rem}
+  .result-ok h4{color:var(--green-600)} .result-no h4{color:var(--sun)}
+  .elig-list{list-style:none;margin-top:.7rem;display:flex;flex-wrap:wrap;gap:.5rem}
+  .elig-list li{background:#fff;border:1px solid var(--line);padding:.35rem .9rem;border-radius:999px;font-size:.88rem;font-weight:600;color:var(--blue-900)}
+  .gpa-info h3{color:var(--blue-900);font-size:1.8rem;margin-bottom:.8rem}
+  .req-table{width:100%;border-collapse:collapse;margin-top:1rem;background:#fff;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm)}
+  .req-table th,.req-table td{padding:.85rem 1rem;text-align:left;border-bottom:1px solid var(--line);font-size:.95rem}
+  .req-table th{background:var(--blue-900);color:#fff;font-weight:600}
+  .req-table tr:last-child td{border-bottom:none}
+  @media(max-width:760px){.gpa-wrap{grid-template-columns:1fr}}
+  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;grid-auto-rows:220px}
+  .gitem{position:relative;border-radius:16px;overflow:hidden;box-shadow:var(--shadow-sm);cursor:pointer}
+  .gitem.tall{grid-row:span 2}
+  .gitem .g-bg{position:absolute;inset:0;transition:transform .6s ease}
+  .gitem:hover .g-bg{transform:scale(1.18)}
+  .gitem .cap{position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,55,102,.85),transparent 55%);display:flex;align-items:flex-end;padding:18px;color:#fff;font-weight:600;opacity:0;transition:.35s}
+  .gitem:hover .cap{opacity:1}
+  .g1{background:linear-gradient(135deg,#0b4a8f,#1273c8)}
+  .g2{background:linear-gradient(135deg,#1f9d55,#25b56a)}
+  .g3{background:linear-gradient(135deg,#e23b2e,#ff6a3d)}
+  .g4{background:linear-gradient(135deg,#b6820a,#f4b731)}
+  .g5{background:linear-gradient(135deg,#083766,#0b4a8f)}
+  .g6{background:linear-gradient(135deg,#127a4a,#1f9d55)}
+  .g-photo{background:url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1788201224026-PCQSo6RWZCANeSY1DJYejpFOjQdnwB.png') center/cover}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+  .map-ph{border-radius:20px;overflow:hidden;min-height:320px;position:relative;box-shadow:var(--shadow-md);background:linear-gradient(135deg,#e7f1fb,#d3e6f7);display:flex;align-items:center;justify-content:center;flex-direction:column;color:var(--blue-700);text-align:center;border:1px dashed var(--blue-500)}
+  .map-ph .pin{font-size:3rem;margin-bottom:.4rem}
+  .contact-info{display:flex;flex-direction:column;gap:18px}
+  .cinfo{display:flex;gap:14px;align-items:flex-start;background:#fff;padding:20px;border-radius:14px;border:1px solid var(--line);box-shadow:var(--shadow-sm)}
+  .cinfo .ci{width:46px;height:46px;flex-shrink:0;border-radius:12px;background:var(--blue-100);color:var(--blue-700);display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+  .cinfo strong{color:var(--blue-900);display:block}
+  .cinfo span{color:var(--muted);font-size:.94rem}
+  @media(max-width:760px){.contact-grid{grid-template-columns:1fr}}
+  footer{background:var(--blue-900);color:#cfe0f0;padding:60px 0 24px}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px;margin-bottom:40px}
+  footer .brand .txt strong{color:#fff}
+  footer .brand .txt span{color:#8fb2d4}
+  footer p{color:#a9c4de;margin-top:1rem;font-size:.95rem}
+  footer h5{color:#fff;font-family:'Baloo Da 2';margin-bottom:1rem;font-size:1.1rem}
+  footer ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+  footer ul a{color:#a9c4de;transition:.2s;font-size:.95rem}
+  footer ul a:hover{color:var(--gold);padding-left:5px}
+  .socials{display:flex;gap:.7rem;margin-top:1.2rem}
+  .socials a{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:.25s;font-size:1.1rem}
+  .socials a:hover{background:var(--sun);transform:translateY(-4px)}
+  .copyright{border-top:1px solid rgba(255,255,255,.12);padding-top:22px;text-align:center;color:#8fb2d4;font-size:.9rem}
+  @media(max-width:760px){.foot-grid{grid-template-columns:1fr;gap:28px}}
+  .reveal{opacity:0;transform:translateY(30px);transition:.7s cubic-bezier(.2,.7,.3,1)}
+  .reveal.show{opacity:1;transform:none}
+  #toTop{position:fixed;right:22px;bottom:22px;width:48px;height:48px;border-radius:50%;border:none;cursor:pointer;background:var(--sun);color:#fff;font-size:1.3rem;box-shadow:var(--shadow-md);opacity:0;pointer-events:none;transition:.3s;z-index:70}
+  #toTop.show{opacity:1;pointer-events:auto}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#home" class="brand">
+      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1788200350342-ijY1u7kQhJliofcHjsFWEPVidSHMDS.jpg" alt="বাড়বকুণ্ড হাই স্কুল অ্যান্ড কলেজ লোগো" />
+      <span class="txt">
+        <strong>বাড়বকুণ্ড হাই স্কুল অ্যান্ড কলেজ</strong>
+        <span>সীতাকুণ্ড, চট্টগ্রাম • স্থাপিত ১৯৫৬</span>
+      </span>
+    </a>
+    <nav id="navMenu">
+      <ul>
+        <li><a href="#home">হোম</a></li>
+        <li><a href="#about">আমাদের সম্পর্কে</a></li>
+        <li><a href="#academic">একাডেমিক</a></li>
+        <li><a href="#notice">নোটিশ</a></li>
+        <li><a href="#gpa">GPA চেকার</a></li>
+        <li><a href="#gallery">গ্যালারি</a></li>
+        <li><a href="#contact">যোগাযোগ</a></li>
+      </ul>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="মেনু খুলুন" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-content">
+      <span class="chip">🎓 জ্ঞানই আলো — মানসম্মত শিক্ষার ৬৮ বছর</span>
+      <h1>শিক্ষাই আলো,<br /><span class="accent">উদ্ভাবনেই ভবিষ্যৎ</span></h1>
+      <p class="sub">সবুজ প্রকৃতির কোলে গড়ে ওঠা এক আধুনিক শিক্ষাপ্রতিষ্ঠান, যেখানে প্রতিটি শিক্ষার্থী স্বপ্ন দেখতে শেখে এবং সেই স্বপ্ন বাস্তবায়নের যোগ্যতা অর্জন করে।</p>
+      <div class="cta">
+        <a href="#gallery" class="btn btn-primary">🧭 ক্যাম্পাস সফর</a>
+        <a href="#academic" class="btn btn-ghost">একাডেমিক বিভাগ</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="num">১৯৫৬</div><small>প্রতিষ্ঠাকাল</small></div>
+        <div><div class="num">২৫০০+</div><small>শিক্ষার্থী</small></div>
+        <div><div class="num">৯৮%</div><small>পাসের হার</small></div>
+        <div><div class="num">৩</div><small>শিক্ষা শাখা</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="notice-strip">
+  <div class="tag">📢 সর্বশেষ</div>
+  <div class="marquee">
+    <ul>
+      <li>একাদশ শ্রেণিতে ভর্তি চলছে — শেষ তারিখ ১৫ সেপ্টেম্বর</li>
+      <li>বার্ষিক পরীক্ষার সময়সূচি প্রকাশিত হয়েছে</li>
+      <li>বিজ্ঞান মেলা ২০২৬ — ২২ অক্টোবর</li>
+      <li>শিক্ষার্থীদের ID কার্ড সংগ্রহের নির্দেশনা</li>
+      <li>ক্রীড়া প্রতিযোগিতার নিবন্ধন শুরু</li>
+      <li>একাদশ শ্রেণিতে ভর্তি চলছে — শেষ তারিখ ১৫ সেপ্টেম্বর</li>
+      <li>বার্ষিক পরীক্ষার সময়সূচি প্রকাশিত হয়েছে</li>
+      <li>বিজ্ঞান মেলা ২০২৬ — ২২ অক্টোবর</li>
+      <li>শিক্ষার্থীদের ID কার্ড সংগ্রহের নির্দেশনা</li>
+      <li>ক্রীড়া প্রতিযোগিতার নিবন্ধন শুরু</li>
+    </ul>
+  </div>
+</div>
+
+<section class="pad" id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">আমাদের সম্পর্কে</span>
+      <h2>এক ঐতিহ্যবাহী শিক্ষাপ্রতিষ্ঠান</h2>
+      <p>১৯৫৬ সালে প্রতিষ্ঠিত বাড়বকুণ্ড হাই স্কুল অ্যান্ড কলেজ চট্টগ্রামের সীতাকুণ্ডে অবস্থিত একটি সুপরিচিত শিক্ষাপ্রতিষ্ঠান, যা যুগ যুগ ধরে গুণগত শিক্ষা ও নৈতিক মূল্যবোধ ছড়িয়ে দিচ্ছে।</p>
+    </div>
+    <div class="notice-cards reveal">
+      <div class="ncard" style="--accent:var(--blue-500)">
+        <h4>🎯 আমাদের লক্ষ্য</h4>
+        <p>প্রতিটি শিক্ষার্থীকে জ্ঞান, দক্ষতা ও নৈতিকতায় সমৃদ্ধ করে একজন আদর্শ নাগরিক হিসেবে গড়ে তোলা।</p>
+      </div>
+      <div class="ncard" style="--accent:var(--green-600)">
+        <h4>🌱 আমাদের পরিবেশ</h4>
+        <p>সবুজে ঘেরা মনোরম প্রাকৃতিক পরিবেশে আধুনিক ল্যাব, সমৃদ্ধ লাইব্রেরি ও প্রশস্ত খেলার মাঠ।</p>
+      </div>
+      <div class="ncard" style="--accent:var(--sun)">
+        <h4>🏆 আমাদের অর্জন</h4>
+        <p>ধারাবাহিক শ্রেষ্ঠ ফলাফল, বৃত্তিপ্রাপ্তি এবং সহশিক্ষা কার্যক্রমে জাতীয় পর্যায়ে স্বীকৃতি।</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="academic" style="background:#fff">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">একাডেমিক বিভাগ</span>
+      <h2>তোমার পছন্দের শাখা বেছে নাও</h2>
+      <p>উচ্চমাধ্যমিক পর্যায়ে তিনটি শাখায় আধুনিক ও যুগোপযোগী পাঠদান।</p>
+    </div>
+    <div class="dept-grid reveal">
+      <article class="dept sci">
+        <div class="dbg"></div><div class="overlay"></div>
+        <div class="body">
+          <div class="icon">🔬</div>
+          <h3>বিজ্ঞান শাখা</h3>
+          <p>ভবিষ্যতের চিকিৎসক, প্রকৌশলী ও বিজ্ঞানী গড়ার পথ।</p>
+          <div class="subjects"><span>পদার্থ</span><span>রসায়ন</span><span>জীববিজ্ঞান</span><span>উচ্চতর গণিত</span></div>
+        </div>
+      </article>
+      <article class="dept hum">
+        <div class="dbg"></div><div class="overlay"></div>
+        <div class="body">
+          <div class="icon">📚</div>
+          <h3>মানবিক শাখা</h3>
+          <p>সমাজ, ইতিহাস ও মানবিক চিন্তার গভীর অনুশীলন।</p>
+          <div class="subjects"><span>ইতিহাস</span><span>পৌরনীতি</span><span>ভূগোল</span><span>অর্থনীতি</span></div>
+        </div>
+      </article>
+      <article class="dept biz">
+        <div class="dbg"></div><div class="overlay"></div>
+        <div class="body">
+          <div class="icon">📈</div>
+          <h3>ব্যবসায় শিক্ষা</h3>
+          <p>উদ্যোক্তা ও ব্যবস্থাপনায় দক্ষ প্রজন্ম তৈরি।</p>
+          <div class="subjects"><span>হিসাববিজ্ঞান</span><span>ব্যবসায় সংগঠন</span><span>ফিন্যান্স</span><span>মার্কেটিং</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="notice">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">নোটিশ বোর্ড</span>
+      <h2>সর্বশেষ আপডেট ও ঘোষণা</h2>
+      <p>পরীক্ষা, ভর্তি ও ইভেন্ট সম্পর্কিত সাম্প্রতিক তথ্য।</p>
+    </div>
+    <div class="notice-cards reveal">
+      <div class="ncard" style="--accent:var(--sun)">
+        <span class="badge b-exam">পরীক্ষা</span>
+        <span class="date">📅 ০৫ সেপ্টেম্বর ২০২৬</span>
+        <h4>বার্ষিক পরীক্ষার সময়সূচি</h4>
+        <p>ষষ্ঠ থেকে দশম শ্রেণির বার্ষিক পরীক্ষার রুটিন প্রকাশিত হয়েছে। নোটিশ বোর্ড থেকে সংগ্রহ করুন।</p>
+      </div>
+      <div class="ncard" style="--accent:var(--green-600)">
+        <span class="badge b-admit">ভর্তি</span>
+        <span class="date">📅 ০১ সেপ্টেম্বর ২০২৬</span>
+        <h4>একাদশ শ্রেণিতে ভর্তি বিজ্ঞপ্তি</h4>
+        <p>২০২৬-২৭ শিক্ষাবর্ষে একাদশ শ্রেণিতে অনলাইন ভর্তি চলছে। শেষ তারিখ ১৫ সেপ্টেম্বর।</p>
+      </div>
+      <div class="ncard" style="--accent:var(--gold)">
+        <span class="badge b-event">ইভেন্ট</span>
+        <span class="date">📅 ২২ অক্টোবর ২০২৬</span>
+        <h4>বার্ষিক বিজ্ঞান মেলা ২০২৬</h4>
+        <p>শিক্ষার্থীদের উদ্ভাবনী প্রকল্প প্রদর্শনীর জন্য নিবন্ধন শুরু হয়েছে। শ্রেণিশিক্ষকের সাথে যোগাযোগ করুন।</p>
+      </div>
+      <div class="ncard" style="--accent:var(--blue-500)">
+        <span class="badge b-event">সাধারণ</span>
+        <span class="date">📅 ২৮ আগস্ট ২০২৬</span>
+        <h4>শিক্ষার্থীদের ID কার্ড</h4>
+        <p>নতুন শিক্ষার্থীদের পরিচয়পত্র অফিস থেকে সংগ্রহের অনুরোধ করা হলো।</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="principal" style="background:#fff">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">অধ্যক্ষের বাণী</span>
+      <h2>প্রধানের কলম থেকে</h2>
+    </div>
+    <div class="principal reveal">
+      <div class="photo">
+        <div class="ring">👨‍🏫</div>
+        <div class="name"><strong>মোঃ আব্দুল করিম</strong><span>অধ্যক্ষ</span></div>
+      </div>
+      <div class="msg">
+        <div class="quote">❝</div>
+        <p>প্রিয় শিক্ষার্থী ও অভিভাবকবৃন্দ, বাড়বকুণ্ড হাই স্কুল অ্যান্ড কলেজ শুধু একটি প্রতিষ্ঠান নয়, এটি স্বপ্ন গড়ার এক আলোকবর্তিকা। আমরা বিশ্বাস করি প্রকৃত শিক্ষা মানুষকে আলোকিত করে এবং সমাজকে এগিয়ে নেয়। আমাদের নিবেদিত শিক্ষকমণ্ডলী প্রতিটি শিক্ষার্থীর সুপ্ত প্রতিভা বিকাশে অঙ্গীকারবদ্ধ। তোমরা স্বপ্ন দেখো, পরিশ্রম করো — সাফল্য নিশ্চয়ই আসবে।</p>
+        <a href="#contact" class="btn btn-primary">📩 যোগাযোগ করুন</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="gpa">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">ইউনিক টুল</span>
+      <h2>ভর্তি যোগ্যতা GPA চেকার</h2>
+      <p>তোমার SSC-এর GPA দিয়ে যাচাই করো কোন শাখায় তুমি ভর্তির যোগ্য।</p>
+    </div>
+    <div class="gpa-wrap reveal">
+      <div class="gpa-card">
+        <label for="grp">তুমি কোন শাখায় SSC পাস করেছ?</label>
+        <select id="grp">
+          <option value="science">বিজ্ঞান</option>
+          <option value="humanities">মানবিক</option>
+          <option value="business">ব্যবসায় শিক্ষা</option>
+        </select>
+        <label for="gpaInput">তোমার SSC GPA লিখো (৫.০০ এর মধ্যে)</label>
+        <input type="number" id="gpaInput" min="1" max="5" step="0.01" placeholder="যেমন: 4.50" />
+        <button class="btn btn-primary" id="checkBtn">✅ যোগ্যতা যাচাই করো</button>
+        <div id="gpaResult"></div>
+      </div>
+      <div class="gpa-info">
+        <h3>ভর্তির নূন্যতম GPA</h3>
+        <p style="color:var(--muted)">উচ্চমাধ্যমিক (একাদশ শ্রেণি) ভর্তির জন্য শাখাভিত্তিক নূন্যতম GPA নিচে দেওয়া হলো।</p>
+        <table class="req-table">
+          <thead><tr><th>শাখা</th><th>নূন্যতম GPA</th></tr></thead>
+          <tbody>
+            <tr><td>🔬 বিজ্ঞান</td><td>৪.০০</td></tr>
+            <tr><td>📈 ব্যবসায় শিক্ষা</td><td>৩.০০</td></tr>
+            <tr><td>📚 মানবিক</td><td>২.৫০</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:.85rem;color:var(--muted);margin-top:1rem">* এটি একটি নির্দেশক টুল। চূড়ান্ত ভর্তি নীতিমালা কলেজ অফিস দ্বারা নির্ধারিত হয়।</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="gallery" style="background:#fff">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">ফটো গ্যালারি</span>
+      <h2>আমাদের ক্যাম্পাসের এক ঝলক</h2>
+      <p>মাউস হোভার করে ছবিগুলো ঘুরে দেখো।</p>
+    </div>
+    <div class="gallery reveal">
+      <div class="gitem tall"><div class="g-bg g-photo"></div><div class="cap">🏫 মূল ক্যাম্পাস</div></div>
+      <div class="gitem"><div class="g-bg g1"></div><div class="cap">📚 লাইব্রেরি</div></div>
+      <div class="gitem"><div class="g-bg g2"></div><div class="cap">🌳 সবুজ প্রাঙ্গণ</div></div>
+      <div class="gitem"><div class="g-bg g3"></div><div class="cap">🔬 বিজ্ঞানাগার</div></div>
+      <div class="gitem tall"><div class="g-bg g4"></div><div class="cap">🏆 পুরস্কার বিতরণী</div></div>
+      <div class="gitem"><div class="g-bg g5"></div><div class="cap">🎭 সাংস্কৃতিক অনুষ্ঠান</div></div>
+      <div class="gitem"><div class="g-bg g6"></div><div class="cap">⚽ খেলার মাঠ</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="contact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">যোগাযোগ</span>
+      <h2>আমাদের সাথে যুক্ত হোন</h2>
+      <p>যেকোনো প্রয়োজনে আমাদের সাথে যোগাযোগ করুন।</p>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="map-ph">
+        <div class="pin">📍</div>
+        <strong>বাড়বকুণ্ড, সীতাকুণ্ড, চট্টগ্রাম</strong>
+        <span style="font-size:.9rem">Google Map এখানে যুক্ত হবে</span>
+      </div>
+      <div class="contact-info">
+        <div class="cinfo"><div class="ci">📍</div><div><strong>ঠিকানা</strong><span>বাড়বকুণ্ড, সীতাকুণ্ড, চট্টগ্রাম, বাংলাদেশ</span></div></div>
+        <div class="cinfo"><div class="ci">📞</div><div><strong>ফোন</strong><span>+৮৮০ ১৭xx-xxxxxx</span></div></div>
+        <div class="cinfo"><div class="ci">✉️</div><div><strong>ইমেইল</strong><span>info@barabkundaschoolcollege.edu.bd</span></div></div>
+        <div class="cinfo"><div class="ci">🕒</div><div><strong>অফিস সময়</strong><span>রবি — বৃহস্পতি, সকাল ৯টা — বিকাল ৪টা</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#home" class="brand">
+          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1788200350342-ijY1u7kQhJliofcHjsFWEPVidSHMDS.jpg" alt="কলেজ লোগো" style="width:52px;height:52px;border-radius:50%" />
+          <span class="txt">
+            <strong>বাড়বকুণ্ড হাই স্কুল অ্যান্ড কলেজ</strong>
+            <span>জ্ঞানই আলো • স্থাপিত ১৯৫৬</span>
+          </span>
+        </a>
+        <p>সবুজ প্রকৃতির কোলে গড়ে ওঠা এক আধুনিক শিক্ষাপ্রতিষ্ঠান, যেখানে প্রতিটি শিক্ষার্থী আলোকিত ভবিষ্যতের স্বপ্ন বুনে।</p>
+        <div class="socials">
+          <a href="#" aria-label="Facebook">📘</a>
+          <a href="#" aria-label="YouTube">▶️</a>
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="Email">✉️</a>
+        </div>
+      </div>
+      <div>
+        <h5>দ্রুত লিঙ্ক</h5>
+        <ul>
+          <li><a href="#home">হোম</a></li>
+          <li><a href="#about">আমাদের সম্পর্কে</a></li>
+          <li><a href="#academic">একাডেমিক</a></li>
+          <li><a href="#notice">নোটিশ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>আরও</h5>
+        <ul>
+          <li><a href="#gpa">GPA চেকার</a></li>
+          <li><a href="#gallery">গ্যালারি</a></li>
+          <li><a href="#principal">অধ্যক্ষের বাণী</a></li>
+          <li><a href="#contact">যোগাযোগ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      © <span id="year"></span> বাড়বকুণ্ড হাই স্কুল অ্যান্ড কলেজ। সর্বস্বত্ব সংরক্ষিত।
+    </div>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="উপরে যান">↑</button>
+
+<script>
+  const ham = document.getElementById('hamburger');
+  const menu = document.getElementById('navMenu');
+  ham.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    ham.classList.toggle('open', open);
+    ham.setAttribute('aria-expanded', open);
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('open'); ham.classList.remove('open'); ham.setAttribute('aria-expanded', false);
+  }));
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', () => {
+    toTop.classList.toggle('show', window.scrollY > 500);
+  });
+  toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const reqGPA = { science: 4.00, business: 3.00, humanities: 2.50 };
+  const nameBn = { science: '🔬 বিজ্ঞান', business: '📈 ব্যবসায় শিক্ষা', humanities: '📚 মানবিক' };
+  function toBn(n){ return String(n).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]); }
+
+  document.getElementById('checkBtn').addEventListener('click', () => {
+    const gpa = parseFloat(document.getElementById('gpaInput').value);
+    const box = document.getElementById('gpaResult');
+    if (isNaN(gpa) || gpa < 1 || gpa > 5) {
+      box.innerHTML = '<div class="result-box result-no"><h4>⚠️ সঠিক GPA লিখো</h4><p>অনুগ্রহ করে ১.০০ থেকে ৫.০০ এর মধ্যে একটি বৈধ GPA প্রবেশ করাও।</p></div>';
+      return;
+    }
+    const eligible = Object.keys(reqGPA).filter(k => gpa >= reqGPA[k]);
+    if (eligible.length > 0) {
+      const items = eligible.map(k => '<li>' + nameBn[k] + '</li>').join('');
+      box.innerHTML =
+        '<div class="result-box result-ok">' +
+          '<h4>🎉 অভিনন্দন! তুমি ভর্তির যোগ্য</h4>' +
+          '<p>তোমার GPA <strong>' + toBn(gpa.toFixed(2)) + '</strong> দিয়ে তুমি নিচের শাখা(গুলো)তে ভর্তি হতে পারবে:</p>' +
+          '<ul class="elig-list">' + items + '</ul>' +
+        '</div>';
+    } else {
+      box.innerHTML =
+        '<div class="result-box result-no">' +
+          '<h4>😔 দুঃখিত</h4>' +
+          '<p>তোমার GPA <strong>' + toBn(gpa.toFixed(2)) + '</strong> নূন্যতম যোগ্যতা (২.৫০) পূরণ করছে না। ভর্তি সংক্রান্ত পরামর্শের জন্য কলেজ অফিসে যোগাযোগ করো।</p>' +
+        '</div>';
+    }
+    box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+</script>
+</body>
+  </html>
