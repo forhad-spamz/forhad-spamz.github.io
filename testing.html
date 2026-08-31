@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital OMR Evaluator - HSC ICT Project</title>
+    <title>AI Smart Study Assistant - HSC ICT</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #eef2f5;
+            background-color: #f0f4f8;
             margin: 0;
             padding: 20px;
             display: flex;
             justify-content: center;
         }
-        .omr-card {
+        .container {
             background: white;
             width: 100%;
-            max-width: 550px;
+            max-width: 600px;
             padding: 25px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
@@ -25,187 +25,157 @@
         h2 { text-align: center; color: #006a4e; margin-bottom: 2px; }
         .sub { text-align: center; color: #666; font-size: 13px; margin-bottom: 20px; }
         
-        .row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px dashed #ddd;
-        }
-        .q-num { font-weight: bold; width: 60px; color: #333; }
-        .bubbles { display: flex; gap: 15px; }
-        
-        /* OMR Bubble Design */
-        .bubble {
-            width: 28px;
-            height: 28px;
-            border: 2px solid #333;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            user-select: none;
+        /* Tab Navigation */
+        .tab-menu { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #006a4e;
             background: white;
-            transition: 0.2s;
-        }
-        .bubble.filled {
-            background: #222;
-            color: white;
-            border-color: #222;
-        }
-
-        .btn {
-            width: 100%;
-            background: #006a4e;
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
+            color: #006a4e;
             font-weight: bold;
+            border-radius: 6px;
             cursor: pointer;
-            margin-top: 20px;
         }
-        .btn:hover { background: #004d39; }
+        .tab-btn.active { background: #006a4e; color: white; }
 
-        #omr-result {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 8px;
-            display: none;
-            text-align: center;
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* Chatbot Box */
+        .chat-box {
+            height: 250px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 10px;
+            overflow-y: auto;
+            background: #fafafa;
+            margin-bottom: 10px;
         }
+        .chat-msg { margin: 8px 0; padding: 8px 12px; border-radius: 6px; font-size: 14px; }
+        .user-msg { background: #e2e8f0; text-align: right; margin-left: 20%; }
+        .ai-msg { background: #d1e7dd; color: #0f5132; text-align: left; margin-right: 20%; }
+
+        .input-group { display: flex; gap: 8px; }
+        .input-group input { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+        .input-group button { background: #006a4e; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+
+        /* Quiz Box */
+        .q-block { margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+        .q-title { font-weight: bold; margin-bottom: 8px; }
+        .opt-btn { display: block; background: #f8f9fa; border: 1px solid #ccc; padding: 8px; margin: 4px 0; border-radius: 5px; cursor: pointer; }
+        .submit-btn { width: 100%; background: #006a4e; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        #quiz-res { margin-top: 15px; font-weight: bold; text-align: center; }
     </style>
 </head>
 <body>
 
-<div class="omr-card">
-    <h2>🎯 Digital OMR Sheet Evaluator</h2>
-    <div class="sub">HSC ICT বিজ্ঞান মেলা প্রজেক্ট - অটোমেটেড ওএমআর খাতা মূল্যায়ন</div>
+<div class="container">
+    <h2>🤖 AI Smart Study Assistant</h2>
+    <div class="sub">HSC ICT বিজ্ঞান মেলা প্রজেক্ট - গ্রুপ ০৮</div>
 
-    <!-- OMR Question 1 -->
-    <div class="row" data-q="1">
-        <span class="q-num">প্রশ্ন ১:</span>
-        <div class="bubbles">
-            <div class="bubble" onclick="fillBubble(this)">ক</div>
-            <div class="bubble" onclick="fillBubble(this)">খ</div>
-            <div class="bubble" onclick="fillBubble(this)">গ</div>
-            <div class="bubble" onclick="fillBubble(this)">ঘ</div>
+    <!-- Navigation Tabs -->
+    <div class="tab-menu">
+        <button class="tab-btn active" onclick="switchTab('chat')">AI ICT চ্যাটবট</button>
+        <button class="tab-btn" onclick="switchTab('quiz')">স্মার্ট কুইজ এসেসমেন্ট</button>
+    </div>
+
+    <!-- TAB 1: AI Chatbot -->
+    <div id="chat-tab" class="tab-content active">
+        <div class="chat-box" id="chat-box">
+            <div class="chat-msg ai-msg">🤖 আসসালামু আলাইকুম! আমি তোমার HSC ICT স্টাডি অ্যাসিস্ট্যান্ট। আমাকে ICT বইয়ের যেকোনো প্রশ্ন জিজ্ঞেস করো (যেমন: HTML কী?, বাইনারি মান, ই-লার্নিং)।</div>
+        </div>
+        <div class="input-group">
+            <input type="text" id="user-input" placeholder="ICT প্রশ্ন টাইপ করুন..." onkeypress="handleKeyPress(event)">
+            <button onclick="askAI()">জিজ্ঞেস করুন</button>
         </div>
     </div>
 
-    <!-- OMR Question 2 -->
-    <div class="row" data-q="2">
-        <span class="q-num">প্রশ্ন ২:</span>
-        <div class="bubbles">
-            <div class="bubble" onclick="fillBubble(this)">ক</div>
-            <div class="bubble" onclick="fillBubble(this)">খ</div>
-            <div class="bubble" onclick="fillBubble(this)">গ</div>
-            <div class="bubble" onclick="fillBubble(this)">ঘ</div>
+    <!-- TAB 2: MCQ Quiz -->
+    <div id="quiz-tab" class="tab-content">
+        <div class="q-block">
+            <div class="q-title">১. কোনটি বিশ্বগ্রামের (Global Village) মূল ভিত্তি? (অধ্যায় ১)</div>
+            <label class="opt-btn"><input type="radio" name="q1" value="1"> ইন্টারনেট কানেক্টিভিটি</label>
+            <label class="opt-btn"><input type="radio" name="q1" value="0"> রিমোট কন্ট্রোল</label>
         </div>
-    </div>
 
-    <!-- OMR Question 3 -->
-    <div class="row" data-q="3">
-        <span class="q-num">প্রশ্ন ৩:</span>
-        <div class="bubbles">
-            <div class="bubble" onclick="fillBubble(this)">ক</div>
-            <div class="bubble" onclick="fillBubble(this)">খ</div>
-            <div class="bubble" onclick="fillBubble(this)">গ</div>
-            <div class="bubble" onclick="fillBubble(this)">ঘ</div>
+        <div class="q-block">
+            <div class="q-title">২. HTML-এ টেবিল তৈরির ট্যাগ কোনটি? (অধ্যায় ৪)</div>
+            <label class="opt-btn"><input type="radio" name="q2" value="0"> &lt;tab&gt;</label>
+            <label class="opt-btn"><input type="radio" name="q2" value="1"> &lt;table&gt;</label>
         </div>
+
+        <button class="submit-btn" onclick="evaluateQuiz()">মূল্যায়ন করুন</button>
+        <div id="quiz-res"></div>
     </div>
-
-    <!-- OMR Question 4 -->
-    <div class="row" data-q="4">
-        <span class="q-num">প্রশ্ন ৪:</span>
-        <div class="bubbles">
-            <div class="bubble" onclick="fillBubble(this)">ক</div>
-            <div class="bubble" onclick="fillBubble(this)">খ</div>
-            <div class="bubble" onclick="fillBubble(this)">গ</div>
-            <div class="bubble" onclick="fillBubble(this)">ঘ</div>
-        </div>
-    </div>
-
-    <!-- OMR Question 5 -->
-    <div class="row" data-q="5">
-        <span class="q-num">প্রশ্ন ৫:</span>
-        <div class="bubbles">
-            <div class="bubble" onclick="fillBubble(this)">ক</div>
-            <div class="bubble" onclick="fillBubble(this)">খ</div>
-            <div class="bubble" onclick="fillBubble(this)">গ</div>
-            <div class="bubble" onclick="fillBubble(this)">ঘ</div>
-        </div>
-    </div>
-
-    <button class="btn" onclick="evaluateOMR()">OMR খাতা স্ক্যান ও স্কোয়ার মূল্যায়ন করুন</button>
-
-    <div id="omr-result"></div>
 </div>
 
 <script>
-    // সঠিক উত্তরপত্র সেট (ক=0, খ=1, গ=2, ঘ=3)
-    const answerKey = {
-        1: 1, // প্রশ্ন ১ এর সঠিক উত্তর: খ
-        2: 2, // প্রশ্ন ২ এর সঠিক উত্তর: গ
-        3: 0, // প্রশ্ন ৩ এর সঠিক উত্তর: ক
-        4: 1, // প্রশ্ন ৪ এর সঠিক উত্তর: খ
-        5: 3  // প্রশ্ন ৫ এর সঠিক উত্তর: ঘ
-    };
-
-    // ওএমআর বৃত্ত ভরাট করার লজিক
-    function fillBubble(el) {
-        let parent = el.parentElement;
-        let bubbles = parent.getElementsByClassName('bubble');
+    // Tab switching logic
+    function switchTab(tab) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
         
-        // একই প্রশ্নের অন্য বৃত্ত খালি করা
-        for (let b of bubbles) {
-            b.classList.remove('filled');
+        if(tab === 'chat') {
+            document.querySelectorAll('.tab-btn')[0].classList.add('active');
+            document.getElementById('chat-tab').classList.add('active');
+        } else {
+            document.querySelectorAll('.tab-btn')[1].classList.add('active');
+            document.getElementById('quiz-tab').classList.add('active');
         }
-        
-        // নির্বাচিত বৃত্তটি কালো করা
-        el.classList.add('filled');
     }
 
-    // অটোমেটিক খাতা মূল্যায়ন লজিক
-    function evaluateOMR() {
-        let score = 0;
-        let rows = document.querySelectorAll('.row');
-        let unattempted = 0;
+    // AI Knowledge Base (Rule-based Bot)
+    const kb = {
+        "html": "HTML এর পূর্ণরূপ হলো HyperText Markup Language। এটি ওয়েবসাইট তৈরি করতে ব্যবহৃত হয় (অধ্যায় ৪)।",
+        "ই-লার্নিং": "ই-লার্নিং (E-Learning) হলো ইলেকট্রনিক প্রযুক্তির সাহায্যে দূরশিক্ষণ বা অনলাইন পড়ালেখার পদ্ধতি (অধ্যায় ১)।",
+        "বাইনারি": "বাইনারি হলো ২ ভিত্তিক সংখ্যা পদ্ধতি, যেখানে শুধুমাত্র ০ এবং ১ ব্যবহার করা হয় (অধ্যায় ৩)।",
+        "c": "C একটি পপুলার প্রোগ্রামিং ভাষা, যা ১৯৮০-র দশকে তৈরি হয় এবং এতে সি-কম্পাইলার ব্যবহার করা হয় (অধ্যায় ৫)।",
+        "লজিক গেট": "লজিক গেট হলো ডিজিটাল সার্কিটের মূল উপাদান যা দিয়ে বুলিয়ান লজিক বাস্তবায়ন করা হয় (অধ্যায় ৩)।"
+    };
 
-        rows.forEach(row => {
-            let qNum = row.getAttribute('data-q');
-            let bubbles = row.querySelectorAll('.bubble');
-            let selectedIndex = -1;
+    function askAI() {
+        let input = document.getElementById('user-input');
+        let txt = input.value.trim().toLowerCase();
+        if(!txt) return;
 
-            bubbles.forEach((b, index) => {
-                if (b.classList.contains('filled')) {
-                    selectedIndex = index;
-                }
-            });
+        let chatBox = document.getElementById('chat-box');
+        
+        // Render User Message
+        chatBox.innerHTML += `<div class="chat-msg user-msg">${input.value}</div>`;
+        input.value = '';
 
-            if (selectedIndex === -1) {
-                unattempted++;
-            } else if (selectedIndex === answerKey[qNum]) {
-                score++;
+        // Generate AI Answer
+        let reply = "দুঃখিত, আমি এই প্রশ্নটির উত্তর সরাসরি খুঁজে পাইনি। তবে এটি HSC ICT বইয়ের ১-৫ম অধ্যায়ের কোনো একটি টপিক।";
+        
+        for (let key in kb) {
+            if (txt.includes(key)) {
+                reply = kb[key];
+                break;
             }
-        });
-
-        let resultDiv = document.getElementById('omr-result');
-        resultDiv.style.display = 'block';
-
-        if (unattempted > 0) {
-            resultDiv.style.background = '#fff3cd';
-            resultDiv.style.color = '#856404';
-            resultDiv.innerHTML = `⚠️ আপনি <strong>${unattempted}টি</strong> প্রশ্নের বৃত্ত ভরাট করেননি।<br>বর্তমান প্রাপ্ত নম্বর: <strong>${score} / 5</strong>`;
-        } else {
-            resultDiv.style.background = '#d4edda';
-            resultDiv.style.color = '#155724';
-            resultDiv.innerHTML = `✅ <strong>OMR স্ক্যান সফল!</strong><br>আপনার প্রাপ্ত নম্বর: <strong>${score} / 5</strong>`;
         }
+
+        setTimeout(() => {
+            chatBox.innerHTML += `<div class="chat-msg ai-msg">🤖 ${reply}</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }, 500);
+    }
+
+    function handleKeyPress(e) {
+        if(e.key === 'Enter') askAI();
+    }
+
+    function evaluateQuiz() {
+        let q1 = document.querySelector('input[name="q1"]:checked');
+        let q2 = document.querySelector('input[name="q2"]:checked');
+        let score = 0;
+
+        if(q1 && q1.value === "1") score++;
+        if(q2 && q2.value === "1") score++;
+
+        let res = document.getElementById('quiz-res');
+        res.innerHTML = `প্রাপ্ত নম্বর: ${score} / ২`;
+        res.style.color = score === 2 ? "green" : "red";
     }
 </script>
 
