@@ -2,158 +2,79 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inclusive Education Portal for Visually Impaired</title>
+    <title>Logic Gate Simulator - HSC ICT</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f7f6;
-            color: #111;
-            transition: background 0.3s, color 0.3s;
-        }
-
-        /* High Contrast Mode for Low Vision */
-        body.high-contrast {
-            background-color: #000000 !important;
-            color: #ffff00 !important; /* Yellow text on Black background */
-        }
-
-        .container {
-            max-width: 650px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            border: 3px solid #006a4e;
-        }
-
-        body.high-contrast .container {
-            background: #000000;
-            border: 3px solid #ffff00;
-            box-shadow: none;
-        }
-
-        h1 { text-align: center; font-size: 24px; }
-        p { font-size: 18px; line-height: 1.6; }
-
-        .accessibility-toolbar {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            justify-content: center;
-        }
-
-        button, a.nav-btn {
-            padding: 12px 18px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            border: 2px solid #006a4e;
-            background-color: #006a4e;
-            color: white;
-            border-radius: 6px;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
-
-        body.high-contrast button, body.high-contrast a.nav-btn {
-            background-color: #ffff00;
-            color: #000000;
-            border: 2px solid #ffffff;
-        }
-
-        button:focus, a.nav-btn:focus {
-            outline: 4px solid #ff4757;
-        }
-
-        .lesson-card {
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin-top: 15px;
-            border-radius: 6px;
-            background: #fafafa;
-        }
-
-        body.high-contrast .lesson-card {
-            background: #111;
-            border: 1px solid #ffff00;
-        }
+        body { font-family: Arial, sans-serif; background: #eef2f5; padding: 20px; display: flex; justify-content: center; }
+        .card { background: white; width: 100%; max-width: 500px; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-top: 5px solid #006a4e; }
+        h2 { color: #006a4e; text-align: center; }
+        .input-group { margin: 15px 0; }
+        select, button { width: 100%; padding: 10px; margin-top: 5px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; }
+        button { background: #006a4e; color: white; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        .result { margin-top: 20px; padding: 15px; background: #e8f5e9; border-radius: 5px; text-align: center; font-size: 18px; font-weight: bold; color: #2e7d32; }
     </style>
 </head>
 <body>
 
-<div class="container">
+<div class="card">
+    <h2>⚡ Digital Logic Gate Simulator</h2>
+    <p style="text-align: center; color: #666;">C-Programming Logic & HTML Interface</p>
 
-    <!-- Accessibility Toolbar -->
-    <div class="accessibility-toolbar">
-        <button id="contrastBtn" onclick="toggleContrast()" onmouseover="speak('হাই কনট্রাস্ট মোড পরিবর্তন করুন')" onfocus="speak('হাই কনট্রাস্ট মোড পরিবর্তন করুন')">👁️ হাই কনট্রাস্ট মোড</button>
-        <button id="fontBtn" onclick="toggleFontSize()" onmouseover="speak('লেখা বড় বা ছোট করুন')" onfocus="speak('লেখা বড় বা ছোট করুন')">🔍 ফন্ট সাইজ বড় করুন</button>
+    <div class="input-group">
+        <label>লজিক গেট নির্বাচন করুন:</label>
+        <select id="gate">
+            <option value="AND">AND Gate (&&)</option>
+            <option value="OR">OR Gate (||)</option>
+            <option value="NAND">NAND Gate</option>
+            <option value="NOR">NOR Gate</option>
+            <option value="XOR">XOR Gate</option>
+        </select>
     </div>
 
-    <h1 tabIndex="0" onmouseover="speak('ইনক্লুসিভ এডুকেশন পোর্টাল')" onfocus="speak('ইনক্লুসিভ এডুকেশন পোর্টাল')">🔊 দৃষ্টিপ্রতিবন্ধীদের জন্য স্মার্ট শিক্ষা পোর্টাল</h1>
-    
-    <p tabIndex="0" onmouseover="speak('এটি এইচএসসি আইসিটি বিজ্ঞান মেলার একটি এক্সেসিবল প্রজেক্ট। কিবোর্ডের ট্যাব বাটন চাপলে বা মাউস আনলে ওয়েবসাইটটি পড়ে শোনাবে।')" onfocus="speak('এটি এইচএসসি আইসিটি বিজ্ঞান মেলার একটি এক্সেসিবল প্রজেক্ট। কিবোর্ডের ট্যাব বাটন চাপলে বা মাউস আনলে ওয়েবসাইটটি পড়ে শোনাবে।')">
-        এই প্ল্যাটফর্মের মাধ্যমে দৃষ্টিপ্রতিবন্ধী ও স্বল্পদৃষ্টি সম্পন্ন শিক্ষার্থীরা সাউন্ড ও অ্যাক্সেসিবিলিটি টুলের সাহায্যে পড়াশোনা করতে পারবে।
-    </p>
-
-    <!-- Audio Lesson Sections -->
-    <div class="lesson-card">
-        <h2 tabIndex="0" onmouseover="speak('অধ্যায় ৪: ওয়েব ডিজাইন পরিচিতি অডিও লেসন')" onfocus="speak('অধ্যায় ৪: ওয়েব ডিজাইন পরিচিতি অডিও লেসন')">📖 অধ্যায় ৪: HTML ও ওয়েব ডিজাইন</h2>
-        <p tabIndex="0" onmouseover="speak('এইচটিএমএল এর মাধ্যমে ওয়েবসাইটের মূল কাঠামো তৈরি করা হয়। ওয়েব পেজ এক্সেসিবল করতে অল্টার ট্যাগ ব্যবহার করা গুরুত্বপূর্ণ।')" onfocus="speak('এইচটিএমএল এর মাধ্যমে ওয়েবসাইটের মূল কাঠামো তৈরি করা হয়। ওয়েব পেজ এক্সেসিবল করতে অল্টার ট্যাগ ব্যবহার করা গুরুত্বপূর্ণ।')">
-            এইচটিএমএল (HTML) এর সাহায্যে ওয়েবসাইটের মূল কাঠামো তৈরি করা হয়...
-        </p>
-        <button onclick="speak('অধ্যায় ৪ এর লেকচার শুরু হচ্ছে। এইচটিএমএল এর পূর্ণরূপ হলো হাইপার টেক্সট মার্কআপ ল্যাঙ্গুয়েজ।')" onmouseover="speak('অডিও প্লে করুন')" onfocus="speak('অডিও প্লে করুন')">▶️ অডিও লেকচার শুনুন</button>
+    <div class="input-group">
+        <label>ইনপুট A (0 অথবা 1):</label>
+        <select id="inputA">
+            <option value="0">0 (LOW)</option>
+            <option value="1">1 (HIGH)</option>
+        </select>
     </div>
 
-    <div class="lesson-card">
-        <h2 tabIndex="0" onmouseover="speak('অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি বিশ্ব ও বাংলাদেশ প্রেক্ষিত')" onfocus="speak('অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি বিশ্ব ও বাংলাদেশ প্রেক্ষিত')">📖 অধ্যায় ১: ই-লার্নিং ও আইসিটি</h2>
-        <p tabIndex="0" onmouseover="speak('আইসিটি ব্যবহারের মাধ্যমে সমাজের পিছিয়ে পড়া ও প্রতিবন্ধী শিক্ষার্থীরাও এখন ডিজিটাল শিক্ষায় অংশগ্রহণ করতে পারছে।')" onfocus="speak('আইসিটি ব্যবহারের মাধ্যমে সমাজের পিছিয়ে পড়া ও প্রতিবন্ধী শিক্ষার্থীরাও এখন ডিজিটাল শিক্ষায় অংশগ্রহণ করতে পারছে।')">
-            ই-লার্নিং প্রযুক্তি শিক্ষা ব্যবস্থার বৈষম্য দূর করতে সহায়তা করছে...
-        </p>
-        <button onclick="speak('অধ্যায় ১ এর লেকচার শুরু হচ্ছে। তথ্য প্রযুক্তির সাহায্যে শিক্ষা এখন সবার জন্য উন্মুক্ত।')" onmouseover="speak('অডিও প্লে করুন')" onfocus="speak('অডিও প্লে করুন')">▶️ অডিও লেকচার শুনুন</button>
+    <div class="input-group">
+        <label>ইনপুট B (0 অথবা 1):</label>
+        <select id="inputB">
+            <option value="0">0 (LOW)</option>
+            <option value="1">1 (HIGH)</option>
+        </select>
     </div>
 
+    <button onclick="calculateGate()">আউটপুট নির্ণয় করুন</button>
+
+    <div id="output" class="result">আউটপুট: -</div>
 </div>
 
 <script>
-    // Text-to-Speech Engine Using Web Speech API
-    function speak(text) {
-        // Cancel ongoing speech
-        window.speechSynthesis.cancel();
+    // C Programming Logic implemented in JS
+    function calculateGate() {
+        int_a = parseInt(document.getElementById("inputA").value); // C type casting
+        int_b = parseInt(document.getElementById("inputB").value);
+        gate = document.getElementById("gate").value;
+        let output = 0;
 
-        let msg = new SpeechSynthesisUtterance();
-        msg.text = text;
-        msg.lang = 'bn-BD'; // Bangla Voice
-        msg.rate = 0.9; // Natural speed
-
-        window.speechSynthesis.speak(msg);
-    }
-
-    // High Contrast Logic
-    function toggleContrast() {
-        document.body.classList.toggle('high-contrast');
-        let isContrast = document.body.classList.contains('high-contrast');
-        speak(isContrast ? "হাই কনট্রাস্ট মোড চালু হয়েছে" : "সাধারণ মোড চালু হয়েছে");
-    }
-
-    // Font Resizing Logic
-    let isBig = false;
-    function toggleFontSize() {
-        if (!isBig) {
-            document.body.style.fontSize = "22px";
-            isBig = true;
-                speak("ফন্ট সাইজ বড় করা হয়েছে");
-        } else {
-            document.body.style.fontSize = "16px";
-            isBig = false;
-            speak("ফন্ট সাইজ স্বাভাবিক করা হয়েছে");
+        // C Programming Conditional Logic (if-else)
+        if (gate === "AND") {
+            output = (int_a && int_b) ? 1 : 0;
+        } else if (gate === "OR") {
+            output = (int_a || int_b) ? 1 : 0;
+        } else if (gate === "NAND") {
+            output = !(int_a && int_b) ? 1 : 0;
+        } else if (gate === "NOR") {
+            output = !(int_a || int_b) ? 1 : 0;
+        } else if (gate === "XOR") {
+            output = (int_a !== int_b) ? 1 : 0;
         }
+
+        document.getElementById("output").innerHTML = "আউটপুট (Output): " + output;
     }
 </script>
 
 </body>
-</html>
+    </html>
