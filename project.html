@@ -3,398 +3,183 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ডিজিটাল এটেনডেন্স অ্যান্ড নোটিফায়ার | Smart Web Attendance System</title>
-
-<!-- Chart.js CDN -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-
-<!-- Bangla Font -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
-
+<meta name="theme-color" content="#0a0a0a" />
+<meta name="description" content="দৃষ্টিপ্রতিবন্ধী শিক্ষার্থীদের জন্য ভয়েস-কন্ট্রোলড এডুকেশন পোর্টাল। মাউস হোভার বা ক্লিক করলে লেখা মুখে পড়ে শোনায়।" />
+<title>ভয়েস এডুকেশন পোর্টাল | দৃষ্টিপ্রতিবন্ধীদের জন্য</title>
 <style>
-  :root {
-    --bg: #0f172a;
-    --surface: #1e293b;
-    --surface-2: #273449;
-    --border: #334155;
-    --primary: #22c55e;
-    --primary-dark: #16a34a;
-    --danger: #ef4444;
-    --danger-dark: #dc2626;
-    --warning: #f59e0b;
-    --text: #e2e8f0;
-    --text-muted: #94a3b8;
-    --radius: 14px;
+  :root{
+    --bg:#0a0a0a; --surface:#151515; --surface-2:#1f1f1f;
+    --text:#f5f5f5; --muted:#a3a3a3; --accent:#4ade80;
+    --accent-strong:#22c55e; --focus:#fde047; --radius:16px;
   }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Hind Siliguri', sans-serif;
-    background: radial-gradient(1200px 600px at 80% -10%, #1e293b 0%, var(--bg) 55%);
-    color: var(--text);
-    min-height: 100vh;
-    line-height: 1.6;
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bg); color:var(--text);
+    font-family:"Segoe UI","Noto Sans Bengali",Tahoma,sans-serif;
+    line-height:1.7; font-size:20px; -webkit-font-smoothing:antialiased;
   }
-
-  .container { max-width: 1100px; margin: 0 auto; padding: 24px 18px 60px; }
-
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
-    padding: 22px 24px;
-    background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    margin-bottom: 26px;
-  }
-  header .brand { display: flex; align-items: center; gap: 14px; }
-  .logo {
-    width: 48px; height: 48px; border-radius: 12px;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    display: grid; place-items: center; font-size: 24px; flex-shrink: 0;
-  }
-  header h1 { font-size: 1.35rem; font-weight: 700; }
-  header p { color: var(--text-muted); font-size: .85rem; }
-  .date-badge {
-    background: var(--surface-2); border: 1px solid var(--border);
-    padding: 10px 16px; border-radius: 10px; font-size: .85rem;
-    font-family: 'Poppins', sans-serif; white-space: nowrap;
-  }
-
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 26px; }
-  .stat-card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 18px;
-  }
-  .stat-card .label { color: var(--text-muted); font-size: .82rem; }
-  .stat-card .value { font-size: 2rem; font-weight: 700; font-family: 'Poppins', sans-serif; margin-top: 4px; }
-  .stat-card.total .value { color: #38bdf8; }
-  .stat-card.present .value { color: var(--primary); }
-  .stat-card.absent .value { color: var(--danger); }
-  .stat-card.rate .value { color: var(--warning); }
-
-  .section {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 22px; margin-bottom: 22px;
-  }
-  .section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
-  .section-head h2 { font-size: 1.15rem; font-weight: 600; }
-  .section-head .hint { font-size: .82rem; color: var(--text-muted); }
-
-  .roll-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
-  .roll-item {
-    display: flex; align-items: center; gap: 10px;
-    background: var(--surface-2); border: 1px solid var(--border);
-    padding: 12px 14px; border-radius: 10px; cursor: pointer;
-    transition: all .15s ease; user-select: none;
-  }
-  .roll-item:hover { border-color: var(--primary); }
-  .roll-item.present { background: rgba(34,197,94,.12); border-color: var(--primary); }
-  .roll-item .checkbox {
-    width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--text-muted);
-    display: grid; place-items: center; flex-shrink: 0; font-size: 14px; color: #fff;
-    transition: all .15s ease;
-  }
-  .roll-item.present .checkbox { background: var(--primary); border-color: var(--primary); }
-  .roll-item .info { line-height: 1.2; }
-  .roll-item .roll { font-weight: 600; font-family: 'Poppins', sans-serif; }
-  .roll-item .name { font-size: .78rem; color: var(--text-muted); }
-
-  .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
-  .btn {
-    border: none; cursor: pointer; padding: 11px 20px; border-radius: 10px;
-    font-family: 'Hind Siliguri', sans-serif; font-weight: 600; font-size: .9rem;
-    display: inline-flex; align-items: center; gap: 8px; transition: transform .1s ease, opacity .15s ease;
-  }
-  .btn:active { transform: scale(.97); }
-  .btn-primary { background: var(--primary); color: #04220f; }
-  .btn-primary:hover { background: var(--primary-dark); color: #fff; }
-  .btn-danger { background: var(--danger); color: #fff; }
-  .btn-danger:hover { background: var(--danger-dark); }
-  .btn-ghost { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
-  .btn-ghost:hover { border-color: var(--text-muted); }
-
-  .absent-box { background: rgba(239,68,68,.06); border: 1px dashed var(--danger); border-radius: 12px; padding: 16px; }
-  .absent-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; min-height: 30px; }
-  .chip {
-    background: rgba(239,68,68,.15); color: #fca5a5; border: 1px solid var(--danger);
-    padding: 6px 12px; border-radius: 999px; font-size: .82rem; font-weight: 500;
-  }
-  .empty { color: var(--text-muted); font-size: .85rem; }
-
-  .chart-wrap { position: relative; height: 320px; }
-
-  .overlay {
-    position: fixed; inset: 0; background: rgba(2,6,23,.7); backdrop-filter: blur(4px);
-    display: none; align-items: center; justify-content: center; padding: 18px; z-index: 50;
-  }
-  .overlay.open { display: flex; }
-  .modal {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
-    width: 100%; max-width: 520px; max-height: 85vh; overflow-y: auto; padding: 24px;
-    animation: pop .2s ease;
-  }
-  @keyframes pop { from { transform: scale(.94); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-  .modal h3 { font-size: 1.2rem; margin-bottom: 6px; }
-  .modal .sub { color: var(--text-muted); font-size: .85rem; margin-bottom: 18px; }
-  .msg-row {
-    display: flex; align-items: center; gap: 12px; padding: 12px;
-    border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; background: var(--surface-2);
-  }
-  .msg-row .icon { font-size: 20px; }
-  .msg-row .txt { flex: 1; font-size: .85rem; }
-  .msg-row .txt b { display: block; }
-  .msg-row .status { font-size: .78rem; color: var(--text-muted); }
-  .msg-row.sent { border-color: var(--primary); }
-  .msg-row.sent .status { color: var(--primary); }
-  .modal-actions { display: flex; gap: 10px; margin-top: 18px; }
-
-  .toast {
-    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(120%);
-    background: var(--primary); color: #04220f; padding: 14px 22px; border-radius: 12px;
-    font-weight: 600; z-index: 60; transition: transform .3s ease; box-shadow: 0 10px 30px rgba(0,0,0,.4);
-  }
-  .toast.show { transform: translateX(-50%) translateY(0); }
-
-  footer { text-align: center; color: var(--text-muted); font-size: .82rem; margin-top: 30px; }
-
-  @media (max-width: 640px) {
-    .stats { grid-template-columns: repeat(2, 1fr); }
-    header h1 { font-size: 1.1rem; }
-  }
+  :focus-visible{ outline:4px solid var(--focus); outline-offset:3px; border-radius:6px; }
+  .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  .skip{ position:absolute; left:-999px; top:8px; background:var(--accent); color:#000; padding:12px 20px; border-radius:8px; font-weight:700; z-index:100; }
+  .skip:focus{ left:16px; }
+  header{ position:sticky; top:0; z-index:50; background:rgba(10,10,10,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--surface-2); padding:14px 20px; }
+  .bar{ max-width:1100px; margin:0 auto; display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:space-between; }
+  .brand{ display:flex; align-items:center; gap:12px; font-weight:800; font-size:22px; }
+  .brand .dot{ width:16px; height:16px; border-radius:50%; background:var(--accent); box-shadow:0 0 14px var(--accent); }
+  .controls{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  button{ font-family:inherit; font-size:17px; font-weight:700; cursor:pointer; border:none; border-radius:12px; padding:12px 18px; transition:transform .08s ease, background .2s ease; display:inline-flex; align-items:center; gap:8px; }
+  button:active{ transform:scale(.96); }
+  .btn-primary{ background:var(--accent); color:#04120a; }
+  .btn-primary:hover{ background:var(--accent-strong); }
+  .btn-ghost{ background:var(--surface-2); color:var(--text); }
+  .btn-ghost:hover{ background:#2a2a2a; }
+  .btn-ghost[aria-pressed="true"]{ background:var(--accent); color:#04120a; }
+  main{ max-width:1100px; margin:0 auto; padding:40px 20px 80px; }
+  section{ margin-bottom:56px; }
+  .hero{ background:linear-gradient(160deg,var(--surface) 0%, #0f1a12 100%); border:1px solid var(--surface-2); border-radius:var(--radius); padding:48px 36px; }
+  .hero h1{ font-size:clamp(30px,5vw,48px); line-height:1.25; margin-bottom:16px; }
+  .hero .accent{ color:var(--accent); }
+  .hero p{ color:var(--muted); max-width:640px; font-size:21px; }
+  .hero .cta{ margin-top:28px; display:flex; gap:14px; flex-wrap:wrap; }
+  h2{ font-size:30px; margin-bottom:8px; }
+  .section-desc{ color:var(--muted); margin-bottom:24px; }
+  .grid{ display:grid; grid-template-columns:1fr; gap:20px; }
+  @media(min-width:720px){ .grid{ grid-template-columns:1fr 1fr; } }
+  .card{ background:var(--surface); border:1px solid var(--surface-2); border-radius:var(--radius); padding:28px; transition:border-color .2s ease, transform .15s ease, background .2s ease; }
+  .speak:hover, .speak:focus{ border-color:var(--accent); background:var(--surface-2); transform:translateY(-3px); cursor:pointer; }
+  .card h3{ font-size:23px; color:var(--accent); margin-bottom:10px; }
+  .card p{ color:#d4d4d4; }
+  .tag{ display:inline-block; margin-top:16px; font-size:15px; background:var(--surface-2); color:var(--accent); padding:6px 12px; border-radius:999px; }
+  #status{ position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:var(--accent); color:#04120a; font-weight:800; padding:12px 24px; border-radius:999px; box-shadow:0 6px 24px rgba(0,0,0,.5); opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:60; font-size:16px; }
+  #status.show{ opacity:1; }
+  footer{ border-top:1px solid var(--surface-2); color:var(--muted); text-align:center; padding:28px 20px; font-size:15px; }
+  body.big{ font-size:24px; }
+  body.big .hero h1{ font-size:clamp(34px,6vw,56px); }
 </style>
 </head>
 <body>
-<div class="container">
-
-  <header>
-    <div class="brand">
-      <div class="logo">✓</div>
-      <div>
-        <h1>ডিজিটাল এটেনডেন্স অ্যান্ড নোটিফায়ার</h1>
-        <p>Smart Web Attendance System</p>
-      </div>
-    </div>
-    <div class="date-badge" id="today"></div>
-  </header>
-
-  <div class="stats">
-    <div class="stat-card total"><div class="label">মোট শিক্ষার্থী</div><div class="value" id="statTotal">0</div></div>
-    <div class="stat-card present"><div class="label">উপস্থিত</div><div class="value" id="statPresent">0</div></div>
-    <div class="stat-card absent"><div class="label">অনুপস্থিত</div><div class="value" id="statAbsent">0</div></div>
-    <div class="stat-card rate"><div class="label">উপস্থিতির হার</div><div class="value" id="statRate">0%</div></div>
-  </div>
-
-  <div class="section">
-    <div class="section-head">
-      <h2>📋 রোল নম্বরে টিক দিয়ে অ্যাটেনডেন্স নিন</h2>
-      <span class="hint">রোল কার্ডে ক্লিক করলেই উপস্থিত হিসেবে টিক পড়বে</span>
-    </div>
-    <div class="roll-grid" id="rollGrid"></div>
-    <div class="actions">
-      <button class="btn btn-primary" onclick="markAll(true)">✓ সবাইকে উপস্থিত</button>
-      <button class="btn btn-ghost" onclick="markAll(false)">↺ রিসেট</button>
+<a class="skip" href="#main">মূল কন্টেন্টে যান</a>
+<header>
+  <div class="bar">
+    <div class="brand"><span class="dot" aria-hidden="true"></span> ভয়েস এডুকেশন পোর্টাল</div>
+    <div class="controls" role="group" aria-label="নিয়ন্ত্রণ">
+      <button id="voiceToggle" class="btn-ghost" aria-pressed="true">🔊 ভয়েস চালু</button>
+      <button id="fontToggle" class="btn-ghost" aria-pressed="false">🔠 বড় লেখা</button>
+      <button id="stopBtn" class="btn-primary">⏹ থামাও</button>
     </div>
   </div>
-
-  <div class="section">
-    <div class="section-head">
-      <h2>🚨 অনুপস্থিত শিক্ষার্থী (স্বয়ংক্রিয় ফিল্টার)</h2>
+</header>
+<main id="main">
+  <section class="hero speak" tabindex="0"
+    data-speak="ইনক্লুসিভ এডুকেশন পোর্টাল। দৃষ্টিপ্রতিবন্ধী শিক্ষার্থীদের জন্য একটি ভয়েস-কন্ট্রোলড শিক্ষা ওয়েবসাইট। মাউস দিয়ে যেকোনো লেখার উপর গেলে বা ক্লিক করলে ওয়েবসাইটটি লেখাটি মুখে পড়ে শোনাবে।">
+    <h1>দৃষ্টিপ্রতিবন্ধী শিক্ষার্থীদের জন্য <span class="accent">ভয়েস ওয়েবসাইট</span></h1>
+    <p>যেসব শিক্ষার্থী চোখে দেখতে সমস্যা বোধ করে, তাদের জন্য বিশেষ ভয়েস-কন্ট্রোলড এডুকেশন ওয়েবসাইট। যেকোনো লেখার উপর মাউস নিলে বা ক্লিক করলে সেটি মুখে পড়ে শোনাবে।</p>
+    <div class="cta">
+      <button class="btn-primary" onclick="document.getElementById('lessons').scrollIntoView()">📚 পাঠ শুরু করো</button>
+      <button class="btn-ghost speak" tabindex="0"
+        data-speak="এই ওয়েবসাইটটি HTML5 Accessibility এবং টেক্সট-টু-স্পিচ প্রযুক্তি ব্যবহার করে তৈরি করা হয়েছে।">
+        ℹ️ কীভাবে কাজ করে
+      </button>
     </div>
-    <div class="absent-box">
-      <span class="empty" id="absentLabel">এখনো কোনো অনুপস্থিত শিক্ষার্থী ফিল্টার হয়নি।</span>
-      <div class="absent-chips" id="absentChips"></div>
+  </section>
+  <section id="lessons">
+    <h2 class="speak" tabindex="0" data-speak="আইসিটি বইয়ের পাঠসমূহ">📘 ICT বইয়ের পাঠসমূহ</h2>
+    <p class="section-desc speak" tabindex="0" data-speak="নিচের যেকোনো কার্ডের উপর মাউস নিলে বা ক্লিক করলে সেটি পড়ে শোনানো হবে।">
+      নিচের যেকোনো কার্ডের উপর মাউস নিলে বা ক্লিক করলে সেটি পড়ে শোনানো হবে।
+    </p>
+    <div class="grid">
+      <article class="card speak" tabindex="0"
+        data-speak="প্রথম অধ্যায়। বায়োমেট্রিক্স ও আইসিটির সামাজিক প্রভাব। তথ্য ও যোগাযোগ প্রযুক্তি কীভাবে আমাদের দৈনন্দিন জীবন, শিক্ষা এবং সমাজকে বদলে দিচ্ছে তা এই অধ্যায়ে আলোচনা করা হয়েছে।">
+        <h3>১ম অধ্যায়</h3>
+        <p>বায়োমেট্রিক্স ও আইসিটির সামাজিক প্রভাব — প্রযুক্তি কীভাবে আমাদের জীবন ও সমাজকে বদলে দিচ্ছে।</p>
+        <span class="tag">সামাজিক প্রভাব</span>
+      </article>
+      <article class="card speak" tabindex="0"
+        data-speak="চতুর্থ অধ্যায়। এইচটিএমএল ফাইভ অ্যাক্সেসিবিলিটি। কীভাবে ওয়েবসাইটকে সবার জন্য, বিশেষ করে প্রতিবন্ধী মানুষের জন্য ব্যবহারযোগ্য করে তোলা যায় তা এখানে শেখানো হয়েছে।">
+        <h3>৪র্থ অধ্যায়</h3>
+        <p>HTML5 Accessibility — কীভাবে ওয়েবসাইটকে সবার জন্য, বিশেষ করে প্রতিবন্ধীদের জন্য ব্যবহারযোগ্য করা যায়।</p>
+        <span class="tag">Accessibility</span>
+      </article>
+      <article class="card speak" tabindex="0"
+        data-speak="টেক্সট টু স্পিচ প্রযুক্তি। এই প্রযুক্তির মাধ্যমে কম্পিউটার লেখা পড়ে শোনাতে পারে। দৃষ্টিপ্রতিবন্ধী শিক্ষার্থীরা এর মাধ্যমে সহজেই পড়াশোনা করতে পারে।">
+        <h3>টেক্সট-টু-স্পিচ</h3>
+        <p>কম্পিউটার লেখা মুখে পড়ে শোনায়। দৃষ্টিপ্রতিবন্ধী শিক্ষার্থীরা সহজেই পড়াশোনা করতে পারে।</p>
+        <span class="tag">TTS প্রযুক্তি</span>
+      </article>
+      <article class="card speak" tabindex="0"
+        data-speak="কীবোর্ড ন্যাভিগেশন। মাউস ছাড়াও শুধু কীবোর্ডের ট্যাব বাটন চেপে পুরো ওয়েবসাইট ব্যবহার করা যায়। এটি প্রতিবন্ধী ব্যবহারকারীদের জন্য খুবই সহায়ক।">
+        <h3>কীবোর্ড ন্যাভিগেশন</h3>
+        <p>মাউস ছাড়াও শুধু কীবোর্ডের Tab বাটন দিয়ে পুরো ওয়েবসাইট ব্যবহার করা যায়।</p>
+        <span class="tag">সহজ ব্যবহার</span>
+      </article>
     </div>
-    <div class="actions">
-      <button class="btn btn-danger" onclick="openNotifier()">📨 অভিভাবকদের অ্যালার্ট পাঠান</button>
+  </section>
+  <section>
+    <h2 class="speak" tabindex="0" data-speak="এই প্রজেক্ট কেন ইউনিক">💡 এই প্রজেক্ট কেন ইউনিক?</h2>
+    <div class="card speak" tabindex="0"
+      data-speak="ওয়েবসাইটে মাউস নিয়ে গেলে বা কোনো বাটন ক্লিক করলে ওয়েবসাইটটি মুখে উচ্চারণ করে টেক্সট পড়ে শোনাবে। এটি মেলায় উপস্থাপন করলে সামাজিক সচেতনতা ও ইনোভেশনের জন্য আলাদা নম্বর পাবে।">
+      <p>ওয়েবসাইটে মাউস নিয়ে গেলে বা কোনো বাটন ক্লিক করলে ওয়েবসাইটটি মুখে উচ্চারণ করে টেক্সট পড়ে শোনাবে (Text-to-Speech)। এটি মেলায় উপস্থাপন করলে সামাজিক সচেতনতা ও ইনোভেশনের জন্য আলাদা নম্বর পাবে।</p>
     </div>
-  </div>
-
-  <div class="section">
-    <div class="section-head">
-      <h2>📊 মাসিক উপস্থিতির পারফরম্যান্স চার্ট (%)</h2>
-      <span class="hint">প্রতিটি শিক্ষার্থীর গড় উপস্থিতির শতকরা হার</span>
-    </div>
-    <div class="chart-wrap"><canvas id="attendanceChart"></canvas></div>
-  </div>
-
-  <footer>টেকনোলজি: HTML · CSS · JavaScript · Chart.js &nbsp;|&nbsp; সায়েন্স মেলা প্রজেক্ট ২০২৬</footer>
-</div>
-
-<div class="overlay" id="overlay">
-  <div class="modal">
-    <h3>📨 অভিভাবক নোটিফিকেশন</h3>
-    <p class="sub">অনুপস্থিত শিক্ষার্থীদের অভিভাবকদের ইমেইল / SMS অ্যালার্ট পাঠানো হবে।</p>
-    <div id="msgList"></div>
-    <div class="modal-actions">
-      <button class="btn btn-primary" style="flex:1" onclick="sendAll()">🚀 সব অ্যালার্ট পাঠান</button>
-      <button class="btn btn-ghost" onclick="closeNotifier()">বন্ধ করুন</button>
-    </div>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
-
+  </section>
+</main>
+<div id="status" role="status" aria-live="polite">পড়া হচ্ছে…</div>
+<footer class="speak" tabindex="0" data-speak="তৈরি করা হয়েছে দৃষ্টিপ্রতিবন্ধী শিক্ষার্থীদের কথা মাথায় রেখে।">
+  © ২০২৬ ভয়েস এডুকেশন পোর্টাল — দৃষ্টিপ্রতিবন্ধী শিক্ষার্থীদের জন্য নিবেদিত।
+</footer>
 <script>
-  const students = [
-    { roll: 1,  name: 'আরিফ হোসেন',    guardian: '017XXXXXX01', monthly: 92 },
-    { roll: 2,  name: 'সুমাইয়া আক্তার', guardian: '018XXXXXX02', monthly: 88 },
-    { roll: 3,  name: 'রাকিব হাসান',    guardian: '019XXXXXX03', monthly: 74 },
-    { roll: 4,  name: 'নুসরাত জাহান',   guardian: '016XXXXXX04', monthly: 95 },
-    { roll: 5,  name: 'তানভীর আহমেদ',   guardian: '015XXXXXX05', monthly: 61 },
-    { roll: 6,  name: 'মিথিলা রহমান',   guardian: '013XXXXXX06', monthly: 83 },
-    { roll: 7,  name: 'সাকিব খান',      guardian: '014XXXXXX07', monthly: 70 },
-    { roll: 8,  name: 'জান্নাত ফেরদৌস', guardian: '017XXXXXX08', monthly: 90 },
-    { roll: 9,  name: 'ইমরান কবির',     guardian: '018XXXXXX09', monthly: 55 },
-    { roll: 10, name: 'ফারিয়া ইসলাম',   guardian: '019XXXXXX10', monthly: 79 },
-    { roll: 11, name: 'নাহিদ রেজা',     guardian: '016XXXXXX11', monthly: 86 },
-    { roll: 12, name: 'অন্তরা দাস',     guardian: '015XXXXXX12', monthly: 68 },
-  ];
-
-  const attendance = {};
-  students.forEach(s => attendance[s.roll] = false);
-
-  const rollGrid = document.getElementById('rollGrid');
-  function renderRolls() {
-    rollGrid.innerHTML = '';
-    students.forEach(s => {
-      const el = document.createElement('div');
-      el.className = 'roll-item' + (attendance[s.roll] ? ' present' : '');
-      el.onclick = () => toggle(s.roll);
-      el.innerHTML = `
-        <div class="checkbox">${attendance[s.roll] ? '✓' : ''}</div>
-        <div class="info">
-          <div class="roll">রোল ${s.roll}</div>
-          <div class="name">${s.name}</div>
-        </div>`;
-      rollGrid.appendChild(el);
+  const synth = window.speechSynthesis;
+  let voiceOn = true;
+  let bnVoice = null;
+  const status = document.getElementById('status');
+  function pickVoice(){
+    const voices = synth.getVoices();
+    bnVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('bn'))
+           || voices.find(v => v.lang && v.lang.toLowerCase().startsWith('hi'))
+           || voices[0] || null;
+  }
+  pickVoice();
+  if (typeof synth !== 'undefined') synth.onvoiceschanged = pickVoice;
+  function speak(text){
+    if(!voiceOn || !text || !('speechSynthesis' in window)) return;
+    synth.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = bnVoice && bnVoice.lang ? bnVoice.lang : 'bn-BD';
+    if(bnVoice) u.voice = bnVoice;
+    u.rate = 0.95; u.pitch = 1;
+    u.onstart = () => showStatus('🔊 পড়া হচ্ছে…');
+    u.onend   = () => hideStatus();
+    synth.speak(u);
+  }
+  function showStatus(msg){ status.textContent = msg; status.classList.add('show'); }
+  function hideStatus(){ status.classList.remove('show'); }
+  function getText(el){ return el.getAttribute('data-speak') || el.textContent.trim(); }
+  document.querySelectorAll('.speak').forEach(el => {
+    el.addEventListener('mouseenter', () => speak(getText(el)));
+    el.addEventListener('focus',      () => speak(getText(el)));
+    el.addEventListener('click',      () => speak(getText(el)));
+    el.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); speak(getText(el)); }
     });
-  }
-
-  function toggle(roll) { attendance[roll] = !attendance[roll]; update(); }
-  function markAll(val) { students.forEach(s => attendance[s.roll] = val); update(); }
-
-  function getAbsent() { return students.filter(s => !attendance[s.roll]); }
-
-  function update() {
-    renderRolls();
-    const present = students.filter(s => attendance[s.roll]).length;
-    const absent = students.length - present;
-    document.getElementById('statTotal').textContent = students.length;
-    document.getElementById('statPresent').textContent = present;
-    document.getElementById('statAbsent').textContent = absent;
-    document.getElementById('statRate').textContent = Math.round(present / students.length * 100) + '%';
-
-    const chips = document.getElementById('absentChips');
-    const label = document.getElementById('absentLabel');
-    const absentList = getAbsent();
-    chips.innerHTML = '';
-    if (absentList.length === 0) {
-      label.style.display = 'block';
-      label.textContent = present === 0 ? 'এখনো কোনো অ্যাটেনডেন্স নেওয়া হয়নি।' : '🎉 সবাই উপস্থিত! কোনো অনুপস্থিতি নেই।';
-    } else {
-      label.style.display = 'block';
-      label.textContent = `${absentList.length} জন শিক্ষার্থী অনুপস্থিত — অভিভাবকদের অ্যালার্ট পাঠানো যাবে:`;
-      absentList.forEach(s => {
-        const c = document.createElement('span');
-        c.className = 'chip';
-        c.textContent = `রোল ${s.roll} · ${s.name}`;
-        chips.appendChild(c);
-      });
-    }
-  }
-
-  const overlay = document.getElementById('overlay');
-  function openNotifier() {
-    const absentList = getAbsent();
-    if (absentList.length === 0) { showToast('কোনো অনুপস্থিত শিক্ষার্থী নেই ✅'); return; }
-    const list = document.getElementById('msgList');
-    list.innerHTML = '';
-    absentList.forEach(s => {
-      const row = document.createElement('div');
-      row.className = 'msg-row';
-      row.dataset.roll = s.roll;
-      row.innerHTML = `
-        <div class="icon">👨‍👩‍👦</div>
-        <div class="txt">
-          <b>${s.name} (রোল ${s.roll})</b>
-          "আপনার সন্তান আজ ক্লাসে অনুপস্থিত ছিল।"
-          <div class="status">📞 ${s.guardian} — পাঠানোর অপেক্ষায়</div>
-        </div>`;
-      list.appendChild(row);
-    });
-    overlay.classList.add('open');
-  }
-  function closeNotifier() { overlay.classList.remove('open'); }
-
-  function sendAll() {
-    const rows = document.querySelectorAll('.msg-row');
-    let i = 0;
-    rows.forEach(row => {
-      setTimeout(() => {
-        row.classList.add('sent');
-        row.querySelector('.status').textContent = '✅ ইমেইল ও SMS অ্যালার্ট সফলভাবে পাঠানো হয়েছে';
-      }, i * 400);
-      i++;
-    });
-    setTimeout(() => {
-      showToast(`${rows.length} জন অভিভাবককে অ্যালার্ট পাঠানো হয়েছে 📨`);
-      setTimeout(closeNotifier, 900);
-    }, rows.length * 400);
-  }
-
-  const toast = document.getElementById('toast');
-  let toastTimer;
-  function showToast(msg) {
-    toast.textContent = msg;
-    toast.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
-  }
-
-  function initChart() {
-    const ctx = document.getElementById('attendanceChart');
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: students.map(s => 'রোল ' + s.roll),
-        datasets: [{
-          label: 'মাসিক উপস্থিতি (%)',
-          data: students.map(s => s.monthly),
-          backgroundColor: students.map(s =>
-            s.monthly >= 80 ? '#22c55e' : s.monthly >= 65 ? '#f59e0b' : '#ef4444'),
-          borderRadius: 6,
-          maxBarThickness: 42,
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { labels: { color: '#e2e8f0', font: { family: 'Hind Siliguri' } } },
-          tooltip: {
-            callbacks: {
-              title: (items) => students[items[0].dataIndex].name,
-              label: (item) => 'উপস্থিতি: ' + item.raw + '%'
-            }
-          }
-        },
-        scales: {
-          y: { beginAtZero: true, max: 100, ticks: { color: '#94a3b8', callback: v => v + '%' }, grid: { color: '#334155' } },
-          x: { ticks: { color: '#94a3b8' }, grid: { display: false } }
-        }
-      }
-    });
-  }
-
-  document.getElementById('today').textContent = new Date().toLocaleDateString('bn-BD', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-  update();
-  initChart();
+  });
+  const voiceToggle = document.getElementById('voiceToggle');
+  voiceToggle.addEventListener('click', () => {
+    voiceOn = !voiceOn;
+    voiceToggle.setAttribute('aria-pressed', String(voiceOn));
+    voiceToggle.textContent = voiceOn ? '🔊 ভয়েস চালু' : '🔇 ভয়েস বন্ধ';
+    if(!voiceOn){ synth.cancel(); hideStatus(); }
+    else speak('ভয়েস চালু করা হয়েছে।');
+  });
+  document.getElementById('stopBtn').addEventListener('click', () => { synth.cancel(); hideStatus(); });
+  const fontToggle = document.getElementById('fontToggle');
+  fontToggle.addEventListener('click', () => {
+    const big = document.body.classList.toggle('big');
+    fontToggle.setAttribute('aria-pressed', String(big));
+    speak(big ? 'বড় লেখা চালু করা হয়েছে।' : 'সাধারণ লেখা।');
+  });
+  window.addEventListener('load', () => {
+    setTimeout(() => speak('স্বাগতম। এই ভয়েস ওয়েবসাইটে যেকোনো লেখার উপর মাউস নিলে বা ক্লিক করলে সেটি পড়ে শোনানো হবে।'), 600);
+  });
 </script>
 </body>
-  </html>
+                                      </html>
