@@ -1,227 +1,438 @@
-<DOCTYPE html>
-<html lang="head
+<!DOCTYPE html>
+<html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ঘরের বাজার - Premium Grocery</title>
-<link rel="stylesheet" href="style.css">
+<title>গ্লোবাল ট্রেডার্স — Multi-Vendor Marketplace</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Hind Siliguri',sans-serif}
+:root{--p:#e63946;--pd:#c1121f;--d:#1a1a1a;--g:#6c757d;--b:#e5e5e5;--lg:#f8f9fa;--sh:0 2px 12px rgba(0,0,0,.08)}
+body{background:var(--lg);overflow-x:hidden;color:#333}
+.c{max-width:1280px;margin:0 auto;padding:0 15px}
+.ts{background:#1a1a1a;color:#fff;font-size:12px;padding:7px 0}
+.tsc{display:flex;justify-content:space-between;max-width:1280px;margin:0 auto;padding:0 15px;flex-wrap:wrap;gap:5px}
+.tsc a{color:#fff;text-decoration:none;margin-right:15px}
+.tsc select{background:#333;color:#fff;border:none;padding:3px 8px;border-radius:3px;font-size:11px}
+header{background:#fff;border-bottom:1px solid var(--b);position:sticky;top:0;z-index:100;box-shadow:var(--sh)}
+.hm{padding:15px 0;display:flex;align-items:center;gap:20px;max-width:1280px;margin:0 auto;padding-left:15px;padding-right:15px}
+.logo{font-size:24px;font-weight:700;color:var(--p);text-decoration:none;display:flex;align-items:center;gap:5px;white-space:nowrap}
+.logo i{font-size:26px}
+.ltag{font-size:10px;color:var(--g);font-weight:400;display:block;margin-top:-3px}
+.sb{flex:1;display:flex;border:2px solid var(--p);border-radius:6px;overflow:hidden;min-width:0}
+.sb input{flex:1;padding:11px 14px;border:none;font-size:14px;outline:none;font-family:inherit;min-width:0}
+.sb select{border:none;border-right:1px solid #eee;padding:0 10px;font-size:12px;background:#fff;cursor:pointer;outline:none}
+.sb button{background:var(--p);color:#fff;border:none;padding:0 22px;cursor:pointer;font-size:16px}
+.sb button:hover{background:var(--pd)}
+.ha{display:flex;gap:18px}
+.hac{text-align:center;color:#333;text-decoration:none;font-size:11px;cursor:pointer;position:relative;white-space:nowrap}
+.hac i{display:block;font-size:20px;margin-bottom:2px}
+.hac:hover{color:var(--p)}
+.cb{position:absolute;top:-5px;right:-8px;background:var(--p);color:#fff;font-size:10px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.cn{background:#fff;border-bottom:1px solid var(--b);padding:10px 0}
+.cnc{display:flex;gap:5px;overflow-x:auto;max-width:1280px;margin:0 auto;padding:0 15px}
+.cnc::-webkit-scrollbar{display:none}
+.ci{padding:7px 13px;font-size:13px;color:#333;text-decoration:none;border-radius:4px;white-space:nowrap;cursor:pointer}
+.ci:hover{background:var(--p);color:#fff}
+.ci i{margin-right:5px;font-size:12px}
+.hero{background:linear-gradient(135deg,#fff5f5,#fff);padding:50px 0;position:relative}
+.hs{display:flex;align-items:center;gap:40px;max-width:1280px;margin:0 auto;padding:0 60px;min-height:320px}
+.hct{flex:1}
+.hb{display:inline-block;background:var(--p);color:#fff;padding:5px 12px;border-radius:20px;font-size:11px;margin-bottom:15px}
+.ht{font-size:42px;font-weight:700;line-height:1.2;margin-bottom:15px;color:#222}
+.ht span{color:var(--p)}
+.hd{font-size:15px;color:#666;margin-bottom:25px;line-height:1.6}
+.hbtn{background:var(--p);color:#fff;padding:14px 35px;border:none;border-radius:4px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit}
+.hbtn:hover{background:var(--pd)}
+.himg{flex:1;height:280px;background:url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800') center/cover;border-radius:8px}
+.hdots{display:flex;gap:8px;justify-content:center;margin-top:20px}
+.hd2{width:10px;height:10px;background:#ccc;border-radius:50%;cursor:pointer;border:none;padding:0}
+.hd2.active{background:var(--p);width:30px;border-radius:5px}
+.sec{padding:50px 0;background:#fff;margin-bottom:15px}
+.sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;max-width:1280px;margin-left:auto;margin-right:auto;padding:0 15px}
+.sht{font-size:22px;font-weight:600}
+.shm{color:var(--p);text-decoration:none;font-size:14px}
+.cat-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:12px;max-width:1280px;margin:0 auto;padding:0 15px}
+.cat-card{background:#fff;border:1px solid var(--b);padding:20px 10px;text-align:center;border-radius:6px;cursor:pointer;transition:.3s}
+.cat-card:hover{border-color:var(--p);transform:translateY(-3px);box-shadow:var(--sh)}
+.cat-card i{font-size:30px;color:var(--p);margin-bottom:8px;display:block}
+.cat-card p{font-size:12px;font-weight:500}
+.bs{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;max-width:1280px;margin:15px auto;padding:0 15px}
+.bsc{padding:20px;color:#fff;border-radius:6px;display:flex;align-items:center;gap:15px}
+.bsc i{font-size:30px}
+.bsc h4{font-size:15px;margin-bottom:3px}
+.bsc p{font-size:12px;opacity:.9;margin:0}
+.b1{background:linear-gradient(135deg,#e63946,#c1121f)}
+.b2{background:linear-gradient(135deg,#2a9d8f,#168a7d)}
+.b3{background:linear-gradient(135deg,#f4a261,#e76f51)}
+.b4{background:linear-gradient(135deg,#264653,#1d3557)}
+.pg{display:grid;grid-template-columns:repeat(5,1fr);gap:15px;max-width:1280px;margin:0 auto;padding:0 15px}
+.pc{background:#fff;border:1px solid var(--b);border-radius:6px;overflow:hidden;cursor:pointer;transition:.3s;position:relative}
+.pc:hover{box-shadow:var(--sh);transform:translateY(-3px);border-color:var(--p)}
+.pi{height:180px;background:#f5f5f5;background-size:cover;background-position:center;position:relative;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:50px}
+.pbadge{position:absolute;top:8px;left:8px;background:var(--p);color:#fff;padding:3px 8px;font-size:10px;border-radius:3px;font-weight:600}
+.pwish{position:absolute;top:8px;right:8px;background:rgba(255,255,255,.9);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#666;border:none}
+.pwish:hover{color:var(--p);background:#fff}
+.pinfo{padding:12px}
+.pname{font-size:13px;font-weight:500;margin-bottom:5px;height:36px;overflow:hidden;color:#333}
+.pprice{font-size:16px;font-weight:700;color:var(--p)}
+.pold{font-size:12px;color:#999;text-decoration:line-through;margin-left:5px}
+.prating{font-size:11px;color:#ffc107;margin-top:5px}
+.prating span{color:#666;margin-left:3px}
+footer{background:var(--d);color:#ccc;padding:50px 0 20px;margin-top:30px}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:30px;max-width:1280px;margin:0 auto;padding:0 15px}
+.fh{color:#fff;margin-bottom:20px;font-size:16px;font-weight:600}
+.fp{color:#999;font-size:13px;line-height:1.8}
+.fl{list-style:none}
+.fl li{margin-bottom:8px}
+.fl a{color:#999;text-decoration:none;font-size:13px}
+.fl a:hover{color:var(--p)}
+.fb{text-align:center;padding-top:20px;border-top:1px solid #333;margin-top:30px;color:#777;font-size:12px;max-width:1280px;margin-left:auto;margin-right:auto;padding-left:15px;padding-right:15px}
+.finp{display:flex;margin-top:15px}
+.finp input{flex:1;padding:10px;border:none;border-radius:4px 0 0 4px;font-family:inherit;outline:none}
+.finp button{background:var(--p);color:#fff;border:none;padding:0 18px;border-radius:0 4px 4px 0;cursor:pointer}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;align-items:center;justify-content:center}
+.modal.show{display:flex}
+.mbox{background:#fff;max-width:500px;width:90%;border-radius:8px;overflow:hidden;max-height:90vh;overflow-y:auto}
+.mhead{padding:15px 20px;border-bottom:1px solid var(--b);display:flex;justify-content:space-between;align-items:center}
+.mhead h3{margin:0;font-size:18px}
+.mhead button{background:none;border:none;font-size:24px;cursor:pointer;color:#999}
+.mbody{padding:20px}
+.mfoot{padding:15px 20px;border-top:1px solid var(--b);display:flex;gap:10px;justify-content:flex-end}
+.mbtn{padding:8px 20px;border:none;border-radius:4px;cursor:pointer;font-family:inherit;font-size:14px}
+.mbp{background:var(--p);color:#fff}
+.mbs{background:#eee;color:#333}
+.toast{position:fixed;bottom:30px;right:30px;background:#28a745;color:#fff;padding:14px 24px;border-radius:4px;font-size:14px;z-index:9999;transform:translateX(400px);transition:.4s;box-shadow:0 5px 20px rgba(0,0,0,.2)}
+.toast.show{transform:translateX(0)}
+@media(max-width:768px){.hm{flex-wrap:wrap;gap:10px}.sb{order:3;width:100%}.pg,.cat-grid{grid-template-columns:repeat(2,1fr)}.bs,.fg{grid-template-columns:1fr}.ht{font-size:28px}}
+'শপিং শুরু করুন!')">এখনই কিনুন</button>
+    </div>
+    <div class="himg"></div></style>
 </head>
 <body>
 
-<div class="top-bar">
-<div class="container">
-<div class="top-left">
-<span>📞 +880 1700-000000</span>
-<span>✉️ info@ghorerbazar.com</span>
-</div>
-<div class="top-right">
-<a href="#">Track Order</a>
-<a href="#">Help</a>
-<a href="#">বাংলা | English</a>
-</div>
-</div>
+<!-- Top Strip -->
+<div class="ts">
+  <div class="tsc">
+    <div>
+      <a href="#"><i class="fas fa-truck"></i> ফ্রি ডেলিভারি ৫০০০৳+</a>
+      <a href="#"><i class="fas fa-undo"></i> ৭ দিন রিটার্ন</a>
+      <a href="#"><i class="fas fa-headset"></i> ২৪/৭ সাপোর্ট</a>
+    </div>
+    <div>
+      <select><option>বাংলা</option><option>English</option></select>
+      <select><option>৳ BDT</option><option>$ USD</option></select>
+    </div>
+  </div>
 </div>
 
-<header class="header">
-<div class="container">
-<div class="logo">
-<a href="index.html">
-<span class="logo-icon">🛒</span>
-<div>
-<h1>ঘরের <span>বাজার</span></h1>
-<small>Premium Grocery Shop</small>
-</div>
-</a>
-</div>
-<div class="search">
-<input type="text" placeholder="পণ্য খুঁজুন...">
-<button>🔍 Search</button>
-</div>
-<div class="header-actions">
-<a href="#" class="h-btn">👤 Login</a>
-<a href="#" class="h-btn">❤️ <span class="badge">0</span></a>
-<a href="cart.html" class="h-btn">🛒 <span class="badge" id="cartCount">0</span> ৳<span id="cartTotal">0</span></a>
-</div>
-</div>
+<!-- Header -->
+<header>
+  <div class="hm">
+    <a href="#" class="logo">
+      <div><i class="fas fa-store"></i> গ্লোবাল ট্রেডার্স <span class="ltag">Multi-Vendor Marketplace</span></div>
+    </a>
+    <div class="sb">
+      <select><option>সব ক্যাটাগরি</option><option>ফার্নিচার</option><option>ইলেকট্রনিক্স</option><option>ফ্যাশন</option></select>
+      <input type="text" placeholder="পণ্য খুঁজুন...">
+      <button><i class="fas fa-search"></i></button>
+    </div>
+    <div class="ha">
+      <a class="hac"><i class="far fa-user"></i>লগইন</a>
+      <a class="hac"><i class="far fa-heart"></i>পছন্দ<span class="cb">3</span></a>
+      <a class="hac" onclick="openCart()"><i class="fas fa-shopping-cart"></i>কার্ট<span class="cb" id="cartCount">0</span></a>
+    </div>
+  </div>
 </header>
 
-<nav class="navbar">
-<div class="container">
-<button class="cat-btn">📋 All Categories ▾</button>
-<ul>
-<li><a href="#" class="active">🏠 Home</a></li>
-<li><a href="#products">🛍️ Products</a></li>
-<li><a href="#offers">🔥 Offers</a></li>
-<li><a href="#about">ℹ️ About</a></li>
-<li><a href="#contact">📞 Contact</a></li>
-</ul>
-</div>
-</nav>
+<!-- Category Nav -->
+<nav class="cn">
+  <div class="cnc">
+    <a class="ci"><i class="fas fa-bars"></i>সব ক্যাটাগরি</a>
 
-<section class="hero">
-<div class="container">
-<div class="hero-slide" style="background:linear-gradient(135deg,#ff6b35,#f7931e)">
-<div class="hero-text">
-<span class="badge-tag">🔥 MEGA SALE</span>
-<h2>সেরা মানের পণ্য<br>সেরা দামে</h2>
-<p>সারাদেশে ফ্রি ডেলিভারি | ২৪/৭ সার্ভিস</p>
-<button class="btn-primary">Shop Now →</button>
-</div>
-<div class="hero-img">🛍️</div>
-</div>
-</div>
-</section>
 
-<section class="features">
-<div class="container">
-<div class="feature-box">
-<i class="fas fa-truck"></i>
-<h4>ফ্রি ডেলিভারি</h4>
-<p>৫০০৳+ অর্ডারে</p>
-</div>
-<div class="feature-box">
-<i class="fas fa-undo"></i>
-<h4>ইজি রিটার্ন</h4>
-<p>৭ দিনের গ্যারান্টি</p>
-</div>
-<div class="feature-box">
-<i class="fas fa-shield-alt"></i>
-<h4>সিকিউর পেমেন্ট</h4>
-<p>১০০% নিরাপদ</p>
-</div>
-<div class="feature-box">
-<i class="fas fa-headset"></i>
-<h4>২৪/৭ সাপোর্ট</h4>
-<p>সবসময় আছি</p>
-</div>
-</div>
-</section>
-
-<section class="categories-section" id="products">
-<div class="container">
-<div class="section-title">
-<h2>🛒 আমাদের ক্যাটাগরি</h2>
-<p>আপনার প্রয়োজনীয় সব কিছু</p>
-</div>
-<div class="categories-grid">
-<a href="#" class="cat-card">
-<div class="cat-icon">🍎</div>
-<h3>Fresh Fruits</h3>
-<small>১২০+ পণ্য</small>
-</a>
-<a href="#" class="cat-card">
-<div class="cat-icon">🥕</div>
-<h3>Vegetables</h3>
-<small>৯৫+ পণ্য</small>
-</a>
-<a href="#" class="cat-card">
-<div class="cat-icon">🐟</div>
-<h3>Fish & Meat</h3>
-<small>৬০+ পণ্য</small>
-</a>
-<a href="#" class="cat-card">
-<div class="cat-icon">🍞</div>
-<h3>Bakery</h3>
-<small>৪৫+ পণ্য</small>
-</a>
-<a href="#" class="cat-card">
-<div class="cat-icon">🍪</div>
-<h3>Snacks</h3>
-<small>২০০+ পণ্য</small>
-</a>
-<a href="#" class="cat-card">
-<div class="cat-icon">☕</div>r(--gray);
-    margin-top: 100px;
-  }
-  .cart-footer {
-    padding: 30px;
-    border-top: 1px solid #eee;
-  }
-  .cart-total {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    font-size: 18px;
-  }
-  .cart-total strong {
-    font-family: 'Cormorant Garamond', serif;
-  }
-  .overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
-    z-index: 999;
-  }
-  .overlay.active {
-    opacity: 1;
-    pointer-events: all;
-  }
-  @media (max-width: 768px) {
-    nav { padding: 16px 20px; }
-    .nav-links { display: none; }
-    .hero-content h1 { font-size: 48px; }
-    .section { padding: 60px 20px; }
-    .categories, .products-grid, .features { grid-template-columns: 1fr; }
-    .editorial { grid-template-columns: 1fr; }
-    .editorial-text { padding: 40px 20px; }
-    .footer-grid { grid-template-columns: 1fr; }
-    .cart-drawer { width: 100%; }
-  }
 </style>
 </head>
 <body>
 
-<div class="announcement">Complimentary shipping on orders over $200 — International delivery available</div>
+<!-- Top Strip -->
+<div class="ts">
+  <div class="tsc">
+    <div>
+      <a href="#"><i class="fas fa-truck"></i> ফ্রি ডেলিভারি ৫০০০৳+</a>
+      <a href="#"><i class="fas fa-undo"></i> ৭ দিন রিটার্ন</a>
+      <a href="#"><i class="fas fa-headset"></i> ২৪/৭ সাপোর্ট</a>
+    </div>
+    <div>
+      <select><option>বাংলা</option><option>English</option></select>
+      <select><option>৳ BDT</option><option>$ USD</option></select>
+    </div>
+  </div>
+</div>
 
-<nav>
-  <div class="logo">LUXE</div>
-  <ul class="nav-links">
-    <li><a href="#">New In</a></li>
-    <li><a href="#">Collections</a></li>
-    <li><a href="#">Women</a></li>
-    <li><a href="#">Men</a></li>
-    <li><a href="#">Editorial</a></li>
-  </ul>
-  <div class="nav-icons">
-    <button class="icon-btn">⌕</button>
-    <button class="icon-btn">♡</button>
-    <button class="icon-btn" onclick="toggleCart()">
-      ◫
-      <span class="cart-count" id="cartCount">0</span>
-    </button>
+<header>
+  <div class="hm">
+    <a href="#" class="logo"><i class="fas fa-store"></i> গ্লোবাল ট্রেডার্স <span class="ltag">Multi-Vendor Marketplace</span></a>
+    <div class="sb">
+      <select><option>সব ক্যাটাগরি</option></select>
+      <input type="text" placeholder="পণ্য খুঁজুন...">
+      <button><i class="fas fa-search"></i></button>
+    </div>
+    <div class="ha">
+      <a class="hac"><i class="far fa-user"></i>লগইন</a>
+      <a class="hac"><i class="far fa-heart"></i>পছন্দ<span class="cb">3</span></a>
+      <a class="hac" onclick="openCart()"><i class="fas fa-shopping-cart"></i>কার্ট<span class="cb" id="cartCount">0</span></a>
+    </div>
+  </div>
+</header>
+
+<nav class="cn">
+  <div class="cnc">
+    <a class="ci">সব ক্যাটাগরি</a>
+    <a class="ci">ফার্নিচার</a><a class="ci">ইলেকট্রনিক্স</a><a class="ci">ফ্যাশন</a>
+    <a class="ci">হোম & লিভিং</a><a class="ci">বিউটি</a><a class="ci">স্পোর্টস</a>
+    <a class="ci">বই</a><a class="ci">গ্রোসারি</a><a class="ci">অটো</a>
   </div>
 </nav>
 
 <section class="hero">
-  <div class="hero-content">
-    <h1>LUXE</h1>
-    <p>Autumn / Winter Collection 2025</p>
-    <button class="btn-primary">Discover the Collection</button>
+  <div class="hs">
+    <div class="hct">
+      <span class="hb">🔥 সুপার সেল ৭০% ছাড়</span>
+      <h1 class="ht">আসবাবপত্র কিনুন <span>সেরা দামে</span></h1>
+      <p class="hd">হাই-কোয়ালিটি ফার্নিচার যা আপনার বাড়িকে দেবে আধুনিক লুক।</p>
+      <button class="hbtn" onclick="showToast('শপিং শুরু হোক!')">এখনই কিনুন</button>
+    </div>
+    <div class="himg"></div>
   </div>
 </section>
 
-<section class="section">
-  <div class="section-header">
-    <div class="subtitle">Curated for You</div>
-    <h2>Shop by Category</h2>
+<div class="bs">
+  <div class="bsc b1"><i class="fas fa-truck-fast"></i><div><h4>ফ্রি ডেলিভারি</h4><p>৫০০০৳+ অর্ডারে</p></div
+
+</div>
+  <div class="bsc b2"><i class="fas fa-shield-halved"></i><div><h4>নিরাপদ পেমেন্ট</h4><p>১০০% সিকিউর</p></div></div>
+  <div class="bsc b3"><i class="fas fa-rotate-left"></i><div><h4>সহজ রিটার্ন</h4><p>৭ দিনের গ্যারান্টি</p></div></div>
+  <div class="bsc b4"><i class="fas fa-headset"></i><div><h4>২৪/৭ সাপোর্ট</h4><p>আমরা সবসময় আছি</p></div></div>
+</div>
+
+<section class="sec">
+  <div class="sh">
+    <h2 class="sht">জনপ্রিয় ক্যাটাগরি</h2>
+    <a href="#" class="shm">সব দেখুন →</a>
   </div>
-  <div class="categories">
-    <div class="category-card" style="background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800')">
-      <div class="category-info">
-        <h3>Women</h3>
-        <span>Shop Now</span>
+  <div class="cat-grid">
+    <div class="cat-card"><i class="fas fa-couch"></i><p>ফার্নিচার</p></div>
+    <div class="cat-card"><i class="fas fa-mobile"></i><p>মোবাইল</p></div>
+    <div class="cat-card"><i class="fas fa-tshirt"></i><p>ফ্যাশন</p></div>
+    <div class="cat-card"><i class="fas fa-blender"></i><p>হোম</p></div>
+    <div class="cat-card"><i class="fas fa-spa"></i><p>বিউটি</p></div>
+    <div class="cat-card"><i class="fas fa-futbol"></i><p>স্পোর্টস</p></div>
+    <div class="cat-card"><i class="fas fa-book"></i><p>বই</p></div>
+    <div class="cat-card"><i class="fas fa-car"></i><p>অটো</p></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="sh">
+    <h2 class="sht">🔥 ফ্ল্যাশ সেল</h2>
+    <a href="#" class="shm">সব দেখুন →</a>
+  </div>
+  <div class="pg" id="products"></div>
+</section>
+
+<section class="sec" style="background:linear-gradient(135deg,#1a1a1a,#333);color:#fff;padding:40px 0">
+  <div style="text-align:center;max-width:600px;margin:0 auto">
+    <h2 style="font-size:28px;margin-bottom:10px">নিউজলেটার সাবস্ক্রাইব করুন</h2>
+    <p style="color:#aaa;margin-bottom:20px">সেরা অফার সবার আগে পান</p>
+    <div class="finp" style="max-width:400px;margin:0 auto">
+      <input type="email" placeholder="আপনার ইমেইল">
+      <button>সাবস্ক্রাইব</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fg">
+    <div>
+      <h4 class="fh">গ্লোবাল ট্রেডার্স</h4>
+      <p class="fp">বাংলাদেশের সবচেয়ে বিশ্বস্ত multi-vendor marketplace। ১০০০+ verified বিক্রেতা, ১ লক্ষ+ পণ্য।</p>
+      <div style="margin-top:15px;font-size:20px">
+        <i class="fab fa-facebook" style="margin-right:10px;cursor:pointer"></i>
+        <i class="fab fa-instagram" style="margin-right:10px;cursor:pointer"></i>
+        <i class="fab fa-youtube" style="margin-right:10px;cursor:pointer"></i>
+        <i class="fab fa-tiktok" style="cursor:pointer"></i>
       </div>
     </div>
-    <div class="category-card" style="background-image: url('https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=800')">
-      <div class="category-info">
-        <h3>Men</h3>
-        <span>Shop Now</span>
+    <div>
+      <h4 class="fh">কোম্পানি</h4>
+      <ul class="fl">
+        <li><a href="#">আমাদের সম্পর্কে</a></li>
+        <li><a href="#">যোগাযোগ</a></li>
+        <li><a href="#">ক্যারিয়ার</a></li>
+        <li><a href="#">ব্লগ</a></li>
+      </ul>
+
+
+    </div>
+    <div>
+      <h4 class="fh">সাহায্য</h4>
+      <ul class="fl">
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">ডেলিভারি</a></li>
+        <li><a href="#">রিটার্ন</a></li>
+        <li><a href="#">প্রাইভেসি</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="fh">ভেন্ডর</h4>
+      <ul class="fl">
+        <li><a href="#">বিক্রি করুন</a></li>
+        <li><a href="#">ভেন্ডর রেজিস্ট্রেশন</a></li>
+        <li><a href="#">ভেন্ডর লগইন</a></li>
+        <li><a href="#">কমিশন</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="fh">যোগাযোগ</h4>
+      <ul class="fl">
+        <li>📞 ০১৭০০-০০০০০০</li>
+        <li>✉️ info@globaltraders.bd</li>
+        <li>📍 ঢাকা, বাংলাদেশ</li>
+      </ul>
+    </div>
+  </div>
+  <div class="fb">© ২০২৫ গ্লোবাল ট্রেডার্স। সকল অধিকার সংরক্ষিত।</div>
+</footer>
+
+<!-- Cart Modal -->
+<div class="modal" id="cartModal">
+  <div class="mbox">
+    <div class="mhead">
+      <h3>🛒 আপনার কার্ট</h3>
+      <button onclick="closeCart()">×</button>
+    </div>
+    <div class="mbody" id="cartItems">
+      <p style="text-align:center;color:#999;padding:30px">কার্ট খালি আছে</p>
+    </div>
+    <div class="mfoot">
+      <div style="flex:1;font-weight:600">মোট: <span id="cartTotal" style="color:var(--p)">৳০</span></div>
+      <button class="mbtn mbs" onclick="closeCart()">বন্ধ</button>
+      <button class="mbtn mbp" onclick="checkout()">অর্ডার করুন</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">✅ কার্টে যোগ হয়েছে!</div>
+
+<script>
+const products=[
+  {id:1,name:'প্রিমিয়াম সোফা সেট',price:45000,old:60000,badge:'-25%',icon:'fa-couch'},
+  {id:2,name:'স্মার্ট LED টিভি ৫৫"',price:65000,old:80000,badge:'-19%',icon:'fa-tv'},
+  {id:3,name:'ডাইনিং টেবিল ৬ সিট',price:28000,old:35000,badge:'-20%',icon:'fa-utensils'},
+  {id:4,name:'ডিজাইনার ওয়ারড্রোব',price:35000,old:42000,badge:'-17%',icon:'fa-door-closed'},
+  {id:5,name:'কমফর্টেবল বেড সেট',price:55000,old:70000,badge:'-21
+
+
+%',icon:'fa-bed'},
+  {id:6,name:'অফিস চেয়ার',price:8500,old:12000,badge:'-29%',icon:'fa-chair'},
+  {id:7,name:'বুকশেলফ ইউনিট',price:15000,old:20000,badge:'-25%',icon:'fa-book-open'},
+  {id:8,name:'কিচেন ক্যাবিনেট',price:32000,old:40000,badge:'-20%',icon:'fa-kitchen-set'},
+  {id:9,name:'স্টাডি ডেস্ক',price:12000,old:15000,badge:'-20%',icon:'fa-laptop'},
+  {id:10,name:'রিডিং ল্যাম্প',price:2500,old:3500,badge:'-29%',icon:'fa-lightbulb'}
+];
+
+let cart=[];
+
+function renderProducts(){
+  const pg=document.getElementById('products');
+  pg.innerHTML=products.map(p=>`
+    <div class="pc" onclick="addToCart(${p.id})">
+      <div class="pi">
+        <i class="fas ${p.icon}"></i>
+        <span class="pbadge">${p.badge}</span>
+        <button class="pwish" onclick="event.stopPropagation();wishlist()"><i class="far fa-heart"></i></button>
+      </div>
+      <div class="pinfo">
+        <p class="pname">${p.name}</p>
+        <div><span class="pprice">৳${p.price.toLocaleString('bn-BD')}</span><span class="pold">৳${p.old.toLocaleString('bn-BD')}</span></div>
+        <div class="prating">★★★★★ <span>(120)</span></div>
       </div>
     </div>
-    <div class="category-card" style="background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800')">
-      <div class="category-info">
-        <h3>Accessories</h3>
+  `).join('');
+}
+
+function addToCart(id){
+  const p=products.find(x=>x.id===id);
+  const ex=cart.find(x=>x.id===id);
+  if(ex) ex.qty++;
+  else cart.push({...p,qty:1});
+  updateCart();
+  showToast('✅ '+p.name+' কার্টে যোগ হয়েছে!');
+}
+
+function updateCart(){
+  document.getElementById('cartCount').textContent=cart.reduce((a,b)=>a+b.qty,0);
+  const items=document.getElementById('cartItems');
+  if(cart.length===0){
+    items.innerHTML='<p style="text-align:center;color:#999;padding:30px">কার্ট খালি আছে</p>';
+  }else{
+    items.innerHTML=cart.map(c=>`
+      <div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #eee;align-items:center">
+        <div style="width:50px;height:50px;background:#f5f5f5;border-radius:4px;display:flex;align-items:center;justify-content:center"><i class="fas ${c.icon}" style="color:var(--p)"></i></div>
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:500">${c.name}</div>
+          <div style="font-size:13px;color:var(--p);font-weight:600">৳${(c.price*c.qty).toLocaleString('bn-BD')}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:5px">
+          <button onclick="changeQty(${c.id},-1)" style="width:25px;height:25px;border:1px solid #ddd;background:#fff;cursor:pointer;border-radius:3px">-</button>
+          <span style="min-width:20px;text-align:center">${c.qty}</span>
+          <button onclick="changeQty(${c.id},1)" style="width:25px;height:25px;border:1px solid #ddd;background:#fff;cursor:pointer;border-radius:3px">+</button>
+        </div>
+      </div>
+    `).join('');
+  }
+  const total=cart.reduce((a,b)=>a+b.price*b.qty,0);
+  document.getElementById('cartTotal').textContent='৳'+total.toLocaleString('bn-BD');
+}
+
+function changeQty(id,d){
+  const item=cart.find(x=>x.id===id);
+  if(item){
+    item.qty+=d;
+    if(item.qty<=0) cart=cart.filter(x=>x.id!==id);
+    updateCart();
+  }
+}
+
+function openCart(){document.getElementById('cartModal').classList.add('show')}
+function closeCart(){document.getElementById('cartModal').classList.remove('show')}
+function checkout(){
+  if(cart.length===0){showToast('⚠️ কার্ট খালি!')}
+  else{showToast('🎉 অর্ডার সফল হয়েছে!');cart=[];updateCart();closeCart();}
+}
+function wishlist(){showToast('❤️ পছন্দের তালিকায় যোগ হয়েছে')}
+function showToast(msg){
+  const t=document.getElement
+
+ById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+// Hero Slider
+let current=0;
+const slides=3;
+function goSlide(i){current=i;document.querySelector('.hs').style.transform=`translateX(-${i*100}%)`;updateDots()}
+function updateDots(){document.querySelectorAll('.hd2').forEach((d,i)=>d.classList.toggle('active',i===current))}
+setInterval(()=>{current=(current+1)%slides;goSlide(current)},4000);
+
+// Init
+renderProducts();
+updateCart();
+</script>
+</body>
+</html>
